@@ -12,7 +12,7 @@ public class RegistroBono {
 
     @ManyToOne
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario", unique = true)
-    private Usuario idUsuario;
+    private Usuario usuario;
 
     @Column(nullable = false)
     private int bonosUno;
@@ -35,11 +35,11 @@ public class RegistroBono {
     }
 
     public Usuario getIdUsuario() {
-        return idUsuario;
+        return usuario;
     }
 
     public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
+        this.usuario = idUsuario;
     }
 
     public int getBonosUno() {
