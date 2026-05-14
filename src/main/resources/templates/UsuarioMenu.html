@@ -1,6 +1,6 @@
 <!-- usuario.html -->
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es", xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,7 @@
                 👤
             </div>
 
-            <h2 class="user-name">
+            <h2 class="user-name" th:text="${usuario.nombre + ' ' + usuario.apellidos}">
                 Juan Pérez
             </h2>
 
@@ -51,9 +51,16 @@
                 <p>Controla tu evolución en el gimnasio</p>
             </div>
 
-            <button class="btn btn-orange">
-                Actualizar datos
-            </button>
+            <div>
+                <button class="btn btn-orange" style="text-decoration: none; color: white;">
+                    Editar Perfil
+                </button>
+
+                <button class="btn btn-orange">
+                    <a th:href="@{/usuario/logout}" style="text-decoration: none; color: white;">Cerrar Sesion</a>
+                </button>
+            </div>
+
 
         </div>
 
@@ -66,12 +73,12 @@
                 <div class="user-card profile-card">
 
                     <img
-                            src="https://images.unsplash.com/photo-1594737625785-c3f8b2a7f3f6?q=80&w=1200&auto=format&fit=crop"
+                            src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=1200&auto=format&fit=crop"
                             class="user-avatar"
                             alt="usuario"
                     >
 
-                    <h3>Juan Pérez</h3>
+                    <h3 th:text="${usuario.idUsuario + '.' + usuario.nombre}"></h3>
 
                     <span class="user-badge">
               Nivel Intermedio
@@ -79,69 +86,28 @@
 
                     <div class="user-info">
 
-                        <div>
-                            <strong>Edad</strong>
-                            <p>25 años</p>
+                        <div class="col-md-4">
+                            <h2>Apellidos</h2>
+                            <p th:text="${usuario.apellidos}">25 años</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h2>DNI</h2>
+                            <p th:text="${usuario.dni}">25 años</p>
                         </div>
 
-                        <div>
-                            <strong>Objetivo</strong>
-                            <p>Perder grasa</p>
+                        <div class="col-md-4">
+                            <h2>Email</h2>
+                            <p th:text="${usuario.email}">ejemplo@gmail.com</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h2>Dirección</h2>
+                            <p th:text="${usuario.direccion}">ejemplo@gmail.com</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h2>Teléfono</h2>
+                            <p th:text="${usuario.telefono}">1234567890</p>
                         </div>
 
-                        <div>
-                            <strong>Altura</strong>
-                            <p>1.78 m</p>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- ESTADÍSTICAS -->
-            <div class="col-lg-8">
-
-                <div class="row g-4">
-
-                    <div class="col-md-4">
-                        <div class="user-card stat-card">
-                            <h2>12</h2>
-                            <p>Días entrenados</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="user-card stat-card">
-                            <h2>5</h2>
-                            <p>Rutinas activas</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="user-card stat-card">
-                            <h2>68kg</h2>
-                            <p>Peso actual</p>
-                        </div>
-                    </div>
-
-                    <!-- PROGRESO -->
-                    <div class="col-12">
-
-                        <div class="user-card progress-card">
-
-                            <h4>Progreso semanal</h4>
-
-                            <div class="progress-bar-custom">
-                                <div class="progress-fill"></div>
-                            </div>
-
-                            <p class="progress-text">
-                                70% completado esta semana
-                            </p>
-
-                        </div>
 
                     </div>
 

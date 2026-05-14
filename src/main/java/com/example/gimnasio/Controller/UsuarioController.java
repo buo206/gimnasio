@@ -65,5 +65,10 @@ public class UsuarioController {
         model.addAttribute("usuario", usuario);
         return "UsuarioMenu";
     }
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/usuario";
+    }
 
 }
