@@ -6,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Table
+@Table(name="Clase")
 @Entity
 public class Clase {
 
@@ -15,11 +15,11 @@ public class Clase {
     @Column(name = "id_clase")
     private int idCalse ;
 
-    @Column(length = 50 , nullable = false)
+    @Column(name="fecha" ,length = 50 , nullable = false)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fecha ;
 
-    @Column(length = 50 , nullable = false)
+    @Column(name = "hora", length = 50 , nullable = false)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalTime hora ;
 

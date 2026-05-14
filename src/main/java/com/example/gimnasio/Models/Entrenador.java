@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@Table
+@Table(name="Entrenador")
 @Entity
 public class Entrenador {
     @Id
@@ -12,22 +12,22 @@ public class Entrenador {
     @Column(name = "id_entrenador")
     private int idEntranador ;
 
-    @Column(length = 100 , nullable = false)
+    @Column(name="nombre",length = 100 , nullable = false)
     private String nombre ;
 
-    @Column(length = 100)
+    @Column(name="apellidos",length = 100)
     private String apellidos;
 
-    @Column(length = 100)
+    @Column(name="direccion",length = 100)
     private String direccion;
 
-    @Column(length = 255 , nullable = false )
+    @Column(name="email", length = 255 , nullable = false )
     private String email;
 
-    @Column(length = 50)
+    @Column(name="password",length = 50)
     private String password;
 
-    @Column(length = 14)
+    @Column(name="telefono",length = 14)
     private String telefono;
 
     //relaciones OnoToMany

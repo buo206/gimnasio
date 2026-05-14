@@ -2,17 +2,18 @@ package com.example.gimnasio.Models;
 
 import jakarta.persistence.*;
 
-@Table
+@Table(name="TipoBono")
 @Entity
 public class TipoBono {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idBono")
     private int idBono ;
 
-    @Column(length = 50 , nullable = false)
+    @Column(name = "tituloBono" ,length = 50 , nullable = false)
     private String tituloBono ;
 
-    @Column(nullable = false)
+    @Column(name = "numeroDeUsos" , nullable = false)
     private int numeroDeUsos ;
 
     public int getIdBono() {

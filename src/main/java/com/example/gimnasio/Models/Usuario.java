@@ -2,7 +2,7 @@ package com.example.gimnasio.Models;
 
 import jakarta.persistence.*;
 
-@Table
+@Table(name = "Usuario")
 @Entity
 public class Usuario {
 
@@ -11,25 +11,25 @@ public class Usuario {
     @Column(name="id_usuario")
     private int idUsuario;
 
-    @Column(length = 100, nullable = false)
+    @Column(name = "nombre", length = 100, nullable = false)
     private String nombre ;
 
-    @Column(length = 100)
+    @Column(name = "apellidos" ,length = 100)
     private String apellidos;
 
-    @Column(length = 100)
+    @Column(name = "direccion" ,length = 100)
     private String direccion;
 
-    @Column(length = 255 , nullable = false)
+    @Column(name = "email" ,length = 255 , nullable = false)
     private String email;
 
-    @Column(length = 50)
+    @Column(name = "password" ,length = 50)
     private String password;
 
-    @Column(length = 9)
+    @Column(name = "dni" ,length = 9)
     private String dni;
 
-    @Column(length = 14)
+    @Column(name = "telefono" ,length = 14)
     private String telefono;
 
     public int getIdUsuario() {

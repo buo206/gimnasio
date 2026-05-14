@@ -5,7 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-@Table
+@Table(name="RegistroUsuarioBono")
 @Entity
 public class RegistroUsuarioBono {
     @Id
@@ -20,11 +20,11 @@ public class RegistroUsuarioBono {
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
 
-    @Column(nullable = false)
+    @Column(name ="fechaCompra" ,nullable = false)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fechaCompra;
 
-    @Column
+    @Column(name="usos")
     private int usos;
 
     public int getIdRegistroBono() {
