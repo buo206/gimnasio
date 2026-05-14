@@ -8,21 +8,6 @@ import java.time.LocalDate;
 @Table
 @Entity
 public class RegistroUsuarioBono {
-    /*CREATE TABLE RegistroUsuarioBono(
-	idRegistroBono Int AUTO_INCREMENT PRIMARY KEY ,
-	idBono Int ,
-    idUsuario Int ,
-    fechaCompra Date ,
-	usos Int ,
-
-    FOREIGN KEY (idUsuario)
-        REFERENCES Usuario(id_usuario)
-        ON DELETE CASCADE,
-
-	FOREIGN KEY (idBono)
-        REFERENCES TipoBono(idBono)
-        ON DELETE CASCADE
-);*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRegistroBono;
