@@ -1,0 +1,224 @@
+
+<!-- clases.html -->
+<!DOCTYPE html >
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lista de Clases</title>
+
+    <!-- Bootstrap -->
+    <link href="/Principal.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <style>.classes-page {
+        min-height: 100vh;
+        padding: 50px;
+        background:
+                radial-gradient(circle at top left, rgba(255,102,0,0.08), transparent 25%),
+                #0f0f0f;
+        color: white;
+        width: 100%;
+        padding: 2%;
+    }
+
+    /* Header */
+    .classes-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+
+    .classes-header h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 10px;
+    }
+
+    .classes-header p {
+        color: rgba(255,255,255,0.6);
+    }
+
+    /* Card */
+    .classes-card {
+        background: rgba(28,28,28,0.95);
+        border-radius: 28px;
+        padding: 30px;
+        border: 1px solid rgba(255,255,255,0.05);
+        box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+    }
+
+    /* Tabla */
+    .classes-table {
+        margin: 0;
+        color: white;
+    }
+
+    .classes-table thead th {
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        color: #ff8c42;
+        font-weight: 700;
+        padding-bottom: 20px;
+    }
+
+    .classes-table tbody tr {
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .classes-table tbody td {
+        background: transparent !important;
+        color: rgba(255,255,255,0.85);
+        padding: 22px 10px;
+    }
+
+    /* Título clase */
+    .class-title {
+        font-weight: 600;
+    }
+
+    /* Estados */
+    .status {
+        padding: 8px 16px;
+        border-radius: 30px;
+        font-size: 0.9rem;
+        font-weight: 700;
+    }
+
+    /* Activa */
+    .active-status {
+        background: rgba(0,255,136,0.12);
+        color: #00d47e;
+        border: 1px solid rgba(0,255,136,0.2);
+    }
+
+    /* Pendiente */
+    .pending-status {
+        background: rgba(255,166,0,0.12);
+        color: #ffb347;
+        border: 1px solid rgba(255,166,0,0.2);
+    }
+
+    /* Finalizada */
+    .completed-status {
+        background: rgba(255,102,0,0.12);
+        color: #ff8c42;
+        border: 1px solid rgba(255,102,0,0.2);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+
+        .classes-page {
+            padding: 30px 15px;
+        }
+
+        .classes-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .classes-card {
+            overflow-x: auto;
+        }
+
+    }</style>
+</head>
+
+
+<body>
+<div class ="trainer-layout">
+    <aside class="trainer-sidebar">
+
+        <div>
+
+            <div class="trainer-logo">
+                🏋️
+            </div>
+
+            <h2 class="trainer-name">
+                Entrenador Personal
+            </h2>
+
+
+        </div>
+
+        <nav class="trainer-menu">
+
+            <a th:href="@{/entrenador/home}">
+                Inicio
+            </a>
+
+            <a th:href="@{/entrenador/lista}" class="active">
+                Mis Clases
+            </a>
+
+            <a href="#">
+                Rutinas
+            </a>
+
+            <a href="#">
+                Horarios
+            </a>
+
+            <a href="#">
+                Ajustes
+            </a>
+
+        </nav>
+
+    </aside>
+    <div class="classes-page">
+        <!-- Header -->
+        <div class="classes-header">
+
+            <div>
+                <h1>Mis Clases</h1>
+                <p>Consulta el estado de tus clases reservadas</p>
+            </div>
+
+            <button class="btn btn-orange">
+                Nueva Reserva
+            </button>
+
+        </div>
+
+        <!-- Tabla -->
+        <div class="classes-card " >
+
+            <table th:if="${listaClases}" class="table classes-table align-middle"  style=" margin-left: auto; margin-right: auto;">
+
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título </th>
+                    <th>Fecha</th>
+                    <th>Hora</th><
+                    <th>Cupo</th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="c : ${listaClases}">
+                        <td th:text="${c.idClase()}"></td>
+                        <td th:text="${c.titulo()}"></td>
+                        <td th:text="${c.fecha()}"></td>
+                        <td th:text="${c.hora()}"></td>
+                        <td th:text="${c.cupoMax()}"></td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>

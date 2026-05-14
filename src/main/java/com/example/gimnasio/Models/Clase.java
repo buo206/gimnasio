@@ -13,14 +13,14 @@ public class Clase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_clase")
-    private int idCalse ;
+    private int idClase ;
 
     @Column(name="fecha" ,length = 50 , nullable = false)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fecha ;
 
     @Column(name = "hora", length = 50 , nullable = false)
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime hora ;
 
     @Column(name ="cupo_max" ,nullable = false)
@@ -34,12 +34,12 @@ public class Clase {
     private String titulo ;
 
 
-    public int getIdCalse() {
-        return idCalse;
+    public int getIdClase() {
+        return idClase;
     }
 
-    public void setIdCalse(int idCalse) {
-        this.idCalse = idCalse;
+    public void setIdClase(int idClase) {
+        this.idClase = idClase;
     }
 
     public LocalDate getFecha() {
@@ -73,4 +73,9 @@ public class Clase {
     public void setEntrenador(Entrenador entrenador) {
         this.entrenador = entrenador;
     }
+
+    public String getTitulo() {return titulo;}
+
+    public void setTitulo(String titulo) {this.titulo = titulo;}
+
 }

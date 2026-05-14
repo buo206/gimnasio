@@ -68,5 +68,15 @@ public class EntrenadorController {
         session.invalidate();
         return "redirect:/entrenador";
     }
+    @GetMapping("/lista")
+    public String lista(HttpSession session, Model model) {
+        EntrenadorDTO entrenador =(EntrenadorDTO) session.getAttribute("entrenadorLogueado");
 
+        if (entrenador == null) {
+            return "redirect:/entrenador/loguin";
+        }
+
+        model.addAttribute("entrenador", entrenador);
+        return "redirect:/clase/listaClases";
+    }
 }
