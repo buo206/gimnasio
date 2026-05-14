@@ -11,11 +11,11 @@ public interface RegistroClaseRepository extends JpaRepository<RegistroClase, In
 
     @Query("""
     SELECT new com.example.gimnasio.DTO.ListaRegistroClaseUsuarioDTO(
-        C.idCalse,
+        C.idClase,
         C.titulo,
         RC.estado
     )
-    FROM RegistroClase RC join Clase C on RC.clase.idCalse = C.idCalse
+    FROM RegistroClase RC join Clase C on RC.clase.idClase = C.idClase
         join RegistroUsuarioBono RB on RB.idRegistroBono = RC.registroUsuarioBono.idRegistroBono
         WHERE RB.usuario.idUsuario = :idUsuario """)
     List<ListaRegistroClaseUsuarioDTO> bucarClasesPorUsuario(int idUsuario);
