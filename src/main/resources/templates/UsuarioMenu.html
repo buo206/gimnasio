@@ -32,7 +32,7 @@
 
         <nav class="user-menu">
             <a href="#" class="active">Inicio</a>
-            <a href="#">Mi progreso</a>
+            <a th:href="@{/usuario/listaClases}">Mis Clases</a>
             <a href="#">Rutinas</a>
             <a href="#">Entrenadores</a>
             <a href="#">Ajustes</a>
@@ -57,7 +57,7 @@
                 </button>
 
                 <button class="btn btn-orange">
-                    <a th:href="@{/usuario/logout}" style="text-decoration: none; color: white;">Cerrar Sesion</a>
+                    <a th:href="@{/usuario/logout}" style="text-decoration: none; color: white;" onclick="return confirm('¿Seguro que quieres cerrar sesion ?');">Cerrar Sesion </a>
                 </button>
             </div>
 

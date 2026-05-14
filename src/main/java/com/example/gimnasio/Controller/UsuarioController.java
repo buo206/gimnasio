@@ -59,12 +59,26 @@ public class UsuarioController {
                 (Usuario) session.getAttribute("usuarioLogueado");
 
         if (usuario == null) {
-            return "redirect:/usuario/loguin";
+            return "redirect:/usuario";
         }
 
         model.addAttribute("usuario", usuario);
         return "UsuarioMenu";
     }
+
+    @GetMapping("/listaClases")
+    public String listaClases(HttpSession session) {
+        Usuario usuario =
+                (Usuario) session.getAttribute("usuarioLogueado");
+
+        if (usuario == null) {
+            return "redirect:/usuario";
+        }
+
+        return "redirect:/registroClase/listaClasesUsuario/"+usuario.getIdUsuario();
+    }
+
+
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();

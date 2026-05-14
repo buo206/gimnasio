@@ -1,0 +1,98 @@
+<!-- clases.html -->
+<!DOCTYPE html >
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lista de Clases</title>
+
+    <link href="/Principal.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="user-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="user-sidebar">
+
+        <div>
+            <div class="user-avatar-small">
+                👤
+            </div>
+
+            <h2 class="user-name" >
+                Juan Pérez
+            </h2>
+
+            <p class="user-role">
+                Usuario Premium
+            </p>
+        </div>
+
+        <nav class="user-menu">
+            <a th:href="@{/usuario/home}" >Inicio</a>
+            <a href="#" class="active">Mis clases</a>
+            <a href="#">Rutinas</a>
+            <a href="#">Entrenadores</a>
+            <a href="#">Ajustes</a>
+        </nav>
+
+    </aside>
+    <div class="classes-page">
+        <!-- Header -->
+        <div class="classes-header">
+
+            <div>
+                <h1>Mis Clases</h1>
+                <p>Consulta el estado de tus clases reservadas</p>
+                <p th:if="${error}" th:text="${error}" style="color:red"></p>
+            </div>
+
+            <button class="btn btn-orange">
+                Nueva Reserva
+            </button>
+
+        </div>
+
+        <!-- Tabla -->
+        <div class="classes-card " >
+            <table class="table classes-table"  style=" margin-left: auto; margin-right: auto;">
+
+                <thead>
+                <tr>
+                    <th>ID Clase</th>
+                    <th>Título Clase</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="registro : ${listaClases}">
+                    <td th:text="${registro.idClase()}"></td>
+                    <td th:text="${registro.titulo()}"></td>
+                    <th:block th:switch="${registro.estado()}">
+                        <td th:text="${registro.estado()}" th:case="${T(com.example.gimnasio.Models.Estado).CANCELADA}" class="status active-status"></td>
+                        <td th:text="${registro.estado()}" th:case="${T(com.example.gimnasio.Models.Estado).CONFIRMADA}" class="status completed-status"></td>
+                        <td th:text="${registro.estado()}" th:case="${T(com.example.gimnasio.Models.Estado).PENDIENTE}" class="status pending-status"></td>
+                    </th:block>
+                    <td>
+                        <p>A</p>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+
+</div>
+
+</body>
+</html>
