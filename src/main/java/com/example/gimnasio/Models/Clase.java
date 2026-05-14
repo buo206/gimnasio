@@ -30,6 +30,9 @@ public class Clase {
     @JoinColumn(name = "id_entrenador")
     private Entrenador entrenador ;
 
+    @Column(name = "titulo" , nullable = false , length = 90)
+    private String titulo ;
+
 
     public int getIdCalse() {
         return idCalse;
