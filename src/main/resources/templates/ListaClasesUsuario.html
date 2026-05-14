@@ -47,6 +47,7 @@
             <div>
                 <h1>Mis Clases</h1>
                 <p>Consulta el estado de tus clases reservadas</p>
+                <p th:if="${error}" th:text="${error}" style="color:red"></p>
             </div>
 
             <button class="btn btn-orange">
@@ -57,68 +58,30 @@
 
         <!-- Tabla -->
         <div class="classes-card " >
-            <p th:if="${error}" th:text="${error}" style="color:red"></p>
-
-            <table class="table classes-table align-middle"  style=" margin-left: auto; margin-right: auto;">
+            <table class="table classes-table"  style=" margin-left: auto; margin-right: auto;">
 
                 <thead>
                 <tr>
                     <th>ID Clase</th>
                     <th>Título Clase</th>
                     <th>Estado</th>
+                    <th>Acciones</th>
                 </tr>
                 </thead>
 
                 <tbody>
-
-                <tr>
-                    <td>#001</td>
-
+                <tr th:each="registro : ${listaClases}">
+                    <td th:text="${registro.idClase()}"></td>
+                    <td th:text="${registro.titulo()}"></td>
+                    <th:block th:switch="${registro.estado()}">
+                        <td th:text="${registro.estado()}" th:case="${T(com.example.gimnasio.Models.Estado).CANCELADA}" class="status active-status"></td>
+                        <td th:text="${registro.estado()}" th:case="${T(com.example.gimnasio.Models.Estado).CONFIRMADA}" class="status completed-status"></td>
+                        <td th:text="${registro.estado()}" th:case="${T(com.example.gimnasio.Models.Estado).PENDIENTE}" class="status pending-status"></td>
+                    </th:block>
                     <td>
-                        <div class="class-title">
-                            💪 Full Body Training
-                        </div>
-                    </td>
-
-                    <td>
-              <span class="status active-status">
-                Activa
-              </span>
+                        <p>A</p>
                     </td>
                 </tr>
-
-                <tr>
-                    <td>#002</td>
-
-                    <td>
-                        <div class="class-title">
-                            🧘 Yoga Relax
-                        </div>
-                    </td>
-
-                    <td>
-              <span class="status pending-status">
-                Pendiente
-              </span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>#003</td>
-
-                    <td>
-                        <div class="class-title">
-                            🔥 HIIT Cardio
-                        </div>
-                    </td>
-
-                    <td>
-              <span class="status completed-status">
-                Finalizada
-              </span>
-                    </td>
-                </tr>
-
                 </tbody>
 
             </table>

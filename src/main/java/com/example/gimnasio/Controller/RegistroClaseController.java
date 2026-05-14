@@ -38,7 +38,7 @@ public class RegistroClaseController {
             return "ListaClasesUsuario";
 
         } catch (RuntimeException e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            model.addAttribute("error", e.getMessage());
             return "ListaClasesUsuario";
         }
 
