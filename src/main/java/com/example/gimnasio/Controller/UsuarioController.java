@@ -1,5 +1,6 @@
 package com.example.gimnasio.Controller;
 
+import com.example.gimnasio.DTO.EntrenadorDTO;
 import com.example.gimnasio.DTO.LoguinDTO;
 import com.example.gimnasio.Models.Usuario;
 import com.example.gimnasio.Repository.UsuarioRepository;
@@ -22,6 +23,17 @@ public class UsuarioController {
         this.servicio = servicio;
     }
 
+    @GetMapping("")
+    public String iniciar(Model model ,HttpSession session){
+        Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
+
+        if (usuario == null) {
+            model.addAttribute("loguin", new LoguinDTO("","") );
+            return "UsuarioPrincipal.html";
+        }
+        return "redirect:/usuario/home";
+    }
+
     @PostMapping("/loguin")
     public String loguin(
             @ModelAttribute LoguinDTO loguinDTO,
@@ -31,27 +43,27 @@ public class UsuarioController {
         try {
             Usuario usuario = servicio.loguin(loguinDTO);
 
-            session.setAttribute("usarioLogueado", usuario);
+            session.setAttribute("usuarioLogueado", usuario);
 
             return "redirect:/usuario/home";
 
         } catch (RuntimeException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/usuario/loguin";
+            return "redirect:/usuario";
         }
     }
 
     @GetMapping("/home")
     public String home(HttpSession session, Model model) {
         Usuario usuario =
-                (Usuario) session.getAttribute("usarioLogueado");
+                (Usuario) session.getAttribute("usuarioLogueado");
 
         if (usuario == null) {
             return "redirect:/usuario/loguin";
         }
 
         model.addAttribute("usuario", usuario);
-        return "usuario/home";
+        return "UsuarioMenu";
     }
 
 }

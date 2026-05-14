@@ -59,16 +59,16 @@
             <!-- Selector -->
             <div class="role-buttons">
 
-                <a th:href="@{/usuario}" class="btn role-btn">
+                <a  class="btn role-btn-disabled">
                     Usuario
                 </a>
 
-                <a  class="btn role-btn-disabled">
+                <a th:href="@{/entrenador}" class="btn role-btn">
                     Entrenador
                 </a>
             </div>
 
-                <form th:action="@{/entrenador/loguin}" th:object="${loguin}" method="post">
+            <form th:action="@{/usuario/loguin}" th:object="${loguin}" method="post">
 
                 <div class="input-group-custom">
 

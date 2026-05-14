@@ -10,7 +10,7 @@ public class Entrenador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_entrenador")
-    private int idEntranador ;
+    private int idEntrenador ;
 
     @Column(name="nombre",length = 100 , nullable = false)
     private String nombre ;
@@ -35,11 +35,11 @@ public class Entrenador {
     private List<Clase> clases;
 
     public int getIdEntranador() {
-        return idEntranador;
+        return idEntrenador;
     }
 
     public void setIdEntranador(int idEntranador) {
-        this.idEntranador = idEntranador;
+        this.idEntrenador = idEntranador;
     }
 
     public String getNombre() {

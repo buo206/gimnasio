@@ -21,8 +21,19 @@ public class EntrenadorController {
         this.servicio = servicio;
     }
 
-    @PostMapping("/login")
-    public String login(
+    @GetMapping("")
+    public String iniciar(Model model ,HttpSession session){
+        EntrenadorDTO entrenador = (EntrenadorDTO) session.getAttribute("entrenadorLogueado");
+
+        if (entrenador == null) {
+            model.addAttribute("loguin", new LoguinDTO("","") );
+            return "Principal.html";
+        }
+        return "redirect:/entrenador/home";
+    }
+
+    @PostMapping("/loguin")
+    public String loguin(
             @ModelAttribute LoguinDTO loginDTO,
             HttpSession session,
             RedirectAttributes redirectAttributes
@@ -36,20 +47,19 @@ public class EntrenadorController {
 
         } catch (RuntimeException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/entrenador/login";
+            return "redirect:/entrenador";
         }
     }
 
     @GetMapping("/home")
     public String home(HttpSession session, Model model) {
-        EntrenadorDTO entrenador =
-                (EntrenadorDTO) session.getAttribute("entrenadorLogueado");
+        EntrenadorDTO entrenador =(EntrenadorDTO) session.getAttribute("entrenadorLogueado");
 
         if (entrenador == null) {
-            return "redirect:/entrenador/login";
+            return "redirect:/entrenador/loguin";
         }
 
         model.addAttribute("entrenador", entrenador);
-        return "entrenador/home";
+        return "EntrenadorMenu";
     }
 }
