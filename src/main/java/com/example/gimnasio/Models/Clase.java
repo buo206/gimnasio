@@ -1,6 +1,7 @@
 package com.example.gimnasio.Models;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -15,9 +16,11 @@ public class Clase {
     private int idCalse ;
 
     @Column(length = 50 , nullable = false)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fecha ;
 
     @Column(length = 50 , nullable = false)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalTime hora ;
 
     @Column(name ="cupo_max" ,nullable = false)
