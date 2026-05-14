@@ -31,7 +31,7 @@ public class Entrenador {
     private String telefono;
 
     //relaciones OnoToMany
-    @OneToMany(mappedBy = "entranador", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "entrenador", cascade = CascadeType.ALL)
     private List<Clase> clases;
 
     public int getIdEntranador() {
