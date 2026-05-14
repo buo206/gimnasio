@@ -1,0 +1,159 @@
+<!-- usuario.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Usuario</title>
+
+    <link href="/Principal.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="user-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="user-sidebar">
+
+        <div>
+            <div class="user-avatar-small">
+                👤
+            </div>
+
+            <h2 class="user-name">
+                Juan Pérez
+            </h2>
+
+            <p class="user-role">
+                Usuario Premium
+            </p>
+        </div>
+
+        <nav class="user-menu">
+            <a href="#" class="active">Inicio</a>
+            <a href="#">Mi progreso</a>
+            <a href="#">Rutinas</a>
+            <a href="#">Entrenadores</a>
+            <a href="#">Ajustes</a>
+        </nav>
+
+    </aside>
+
+    <!-- CONTENIDO -->
+    <main class="user-content">
+
+        <!-- HEADER -->
+        <div class="user-header">
+
+            <div>
+                <h1>Mi progreso</h1>
+                <p>Controla tu evolución en el gimnasio</p>
+            </div>
+
+            <button class="btn btn-orange">
+                Actualizar datos
+            </button>
+
+        </div>
+
+        <!-- CARDS -->
+        <div class="row g-4">
+
+            <!-- PERFIL -->
+            <div class="col-lg-4">
+
+                <div class="user-card profile-card">
+
+                    <img
+                            src="https://images.unsplash.com/photo-1594737625785-c3f8b2a7f3f6?q=80&w=1200&auto=format&fit=crop"
+                            class="user-avatar"
+                            alt="usuario"
+                    >
+
+                    <h3>Juan Pérez</h3>
+
+                    <span class="user-badge">
+              Nivel Intermedio
+            </span>
+
+                    <div class="user-info">
+
+                        <div>
+                            <strong>Edad</strong>
+                            <p>25 años</p>
+                        </div>
+
+                        <div>
+                            <strong>Objetivo</strong>
+                            <p>Perder grasa</p>
+                        </div>
+
+                        <div>
+                            <strong>Altura</strong>
+                            <p>1.78 m</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ESTADÍSTICAS -->
+            <div class="col-lg-8">
+
+                <div class="row g-4">
+
+                    <div class="col-md-4">
+                        <div class="user-card stat-card">
+                            <h2>12</h2>
+                            <p>Días entrenados</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="user-card stat-card">
+                            <h2>5</h2>
+                            <p>Rutinas activas</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="user-card stat-card">
+                            <h2>68kg</h2>
+                            <p>Peso actual</p>
+                        </div>
+                    </div>
+
+                    <!-- PROGRESO -->
+                    <div class="col-12">
+
+                        <div class="user-card progress-card">
+
+                            <h4>Progreso semanal</h4>
+
+                            <div class="progress-bar-custom">
+                                <div class="progress-fill"></div>
+                            </div>
+
+                            <p class="progress-text">
+                                70% completado esta semana
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>
