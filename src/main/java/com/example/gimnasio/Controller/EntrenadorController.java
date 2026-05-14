@@ -62,4 +62,11 @@ public class EntrenadorController {
         model.addAttribute("entrenador", entrenador);
         return "EntrenadorMenu";
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/entrenador";
+    }
+
 }
