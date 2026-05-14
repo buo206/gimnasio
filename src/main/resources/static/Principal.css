@@ -240,3 +240,412 @@ body {
     }
 
 }
+
+/*nuevo*/
+.trainer-layout {
+    min-height: 100vh;
+    display: flex;
+    background:
+            radial-gradient(circle at top left, rgba(255,102,0,0.08), transparent 25%),
+            #0f0f0f;
+}
+
+/* Sidebar */
+.trainer-sidebar {
+    width: 280px;
+    background: rgba(20,20,20,0.98);
+    border-right: 1px solid rgba(255,255,255,0.05);
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.trainer-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #ff6600, #ff8c42);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 25px;
+}
+
+.trainer-name {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.trainer-role {
+    color: rgba(255,255,255,0.6);
+}
+
+/* Menú */
+.trainer-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.trainer-menu a {
+    text-decoration: none;
+    color: rgba(255,255,255,0.7);
+    padding: 14px 18px;
+    border-radius: 14px;
+    transition: 0.3s ease;
+    font-weight: 500;
+}
+
+.trainer-menu a:hover,
+.trainer-menu a.active {
+    background: linear-gradient(135deg, #ff6600, #ff8c42);
+    color: white;
+}
+
+/* Contenido */
+.trainer-content {
+    flex: 1;
+    padding: 50px;
+}
+
+/* Header */
+.trainer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.trainer-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.trainer-header p {
+    color: rgba(255,255,255,0.6);
+}
+
+/* Cards */
+.trainer-card {
+    background: rgba(28,28,28,0.95);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 28px;
+    padding: 30px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+}
+
+/* Perfil */
+.profile-card {
+    text-align: center;
+}
+
+.trainer-avatar {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    border: 4px solid #ff6600;
+}
+
+.profile-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.trainer-badge {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 30px;
+    background: rgba(255,102,0,0.15);
+    border: 1px solid rgba(255,102,0,0.3);
+    color: #ff8c42;
+    margin-bottom: 30px;
+}
+
+/* Info */
+.trainer-info {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.trainer-info strong {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.trainer-info p {
+    margin: 0;
+    color: rgba(255,255,255,0.65);
+}
+
+/* Stats */
+.stat-card {
+    text-align: center;
+}
+
+.stat-card h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #ff7b00;
+}
+
+.stat-card p {
+    color: rgba(255,255,255,0.65);
+    margin-top: 10px;
+}
+
+/* Actividad */
+.card-title-custom {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.activity-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.activity-item {
+    padding: 18px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.03);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.activity-item span {
+    color: white;
+}
+
+.activity-item small {
+    color: rgba(255,255,255,0.45);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+
+    .trainer-layout {
+        flex-direction: column;
+    }
+
+    .trainer-sidebar {
+        width: 100%;
+    }
+
+    .trainer-content {
+        padding: 30px 20px;
+    }
+
+    .trainer-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+}
+
+
+/* =======================================================
+   PERFIL USUARIO (AÑADIR AL MISMO CSS)
+======================================================= */
+
+.user-layout {
+    min-height: 100vh;
+    display: flex;
+    background:
+            radial-gradient(circle at top left, rgba(255,102,0,0.08), transparent 25%),
+            #0f0f0f;
+}
+
+/* SIDEBAR */
+.user-sidebar {
+    width: 280px;
+    background: rgba(20,20,20,0.98);
+    border-right: 1px solid rgba(255,255,255,0.05);
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-avatar-small {
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #ff6600, #ff8c42);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.user-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.user-role {
+    color: rgba(255,255,255,0.6);
+}
+
+/* MENU */
+.user-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 40px;
+}
+
+.user-menu a {
+    text-decoration: none;
+    color: rgba(255,255,255,0.7);
+    padding: 14px 18px;
+    border-radius: 14px;
+    transition: 0.3s ease;
+}
+
+.user-menu a:hover,
+.user-menu a.active {
+    background: linear-gradient(135deg, #ff6600, #ff8c42);
+    color: white;
+}
+
+/* CONTENIDO */
+.user-content {
+    flex: 1;
+    padding: 50px;
+}
+
+/* HEADER */
+.user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.user-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.user-header p {
+    color: rgba(255,255,255,0.6);
+}
+
+/* CARDS */
+.user-card {
+    background: rgba(28,28,28,0.95);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 28px;
+    padding: 30px;
+}
+
+/* PERFIL */
+.profile-card {
+    text-align: center;
+}
+
+.user-avatar {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    border: 4px solid #ff6600;
+}
+
+.user-badge {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 30px;
+    background: rgba(255,102,0,0.15);
+    border: 1px solid rgba(255,102,0,0.3);
+    color: #ff8c42;
+    margin-bottom: 25px;
+}
+
+.user-info {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.user-info strong {
+    display: block;
+    color: white;
+}
+
+/* STATS */
+.stat-card {
+    text-align: center;
+}
+
+.stat-card h2 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #ff7b00;
+}
+
+.stat-card p {
+    color: rgba(255,255,255,0.65);
+}
+
+/* PROGRESO */
+.progress-card h4 {
+    margin-bottom: 20px;
+}
+
+.progress-bar-custom {
+    width: 100%;
+    height: 14px;
+    background: #2a2a2a;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff6600, #ff8c42);
+}
+
+.progress-text {
+    margin-top: 15px;
+    color: rgba(255,255,255,0.6);
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+
+    .user-layout {
+        flex-direction: column;
+    }
+
+    .user-sidebar {
+        width: 100%;
+    }
+
+    .user-content {
+        padding: 30px 20px;
+    }
+
+    .user-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+}
