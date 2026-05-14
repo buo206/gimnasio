@@ -2,6 +2,8 @@ package com.example.gimnasio.Models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Table
 @Entity
 public class Entrenador {
@@ -27,6 +29,10 @@ public class Entrenador {
 
     @Column(length = 14)
     private String telefono;
+
+    //relaciones OnoToMany
+    @OneToMany(mappedBy = "entranador", cascade = CascadeType.ALL)
+    private List<Clase> clases;
 
     public int getIdEntranador() {
         return idEntranador;
