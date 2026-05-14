@@ -1,6 +1,8 @@
 package com.example.gimnasio.Models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -22,6 +24,7 @@ public class RegistroClase {
     private Clase clase ;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     @Column(name = "estado", length = 15, nullable = false)
     private Estado estado;
 

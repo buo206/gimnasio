@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Gym</title>
+
+    <!-- Bootstrap -->
+    <link href="/Principal.css" rel="stylesheet">
+
+    <!-- CSS propio -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="main-wrapper">
+
+    <!-- Imagen -->
+    <div class="image-section">
+        <div class="image-card">
+
+            <img
+                    src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1400&auto=format&fit=crop"
+                    alt="Gym"
+            >
+
+            <div class="image-overlay"></div>
+
+            <div class="image-content">
+                <span>FITNESS CLUB</span>
+
+                <h1>
+                    Entrena tu mejor versión
+                </h1>
+
+                <p>
+                    Accede a tu cuenta y continúa tu progreso.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Login -->
+    <div class="login-section">
+
+        <div class="login-card">
+
+            <div class="logo-circle">
+                🏋️
+            </div>
+
+            <h2>Bienvenido</h2>
+
+            <p class="subtitle">
+                Inicia sesión en tu gimnasio
+            </p>
+
+            <!-- Selector -->
+            <div class="role-selector">
+
+                <input
+                        type="radio"
+                        name="role"
+                        id="usuario"
+                        checked
+                >
+
+                <label for="usuario">
+                    Usuario
+                </label>
+
+                <input
+                        type="radio"
+                        name="role"
+                        id="entrenador"
+                >
+
+                <label for="entrenador">
+                    Entrenador
+                </label>
+
+            </div>
+
+            <form>
+
+                <div class="input-group-custom">
+
+                    <label>
+                        Correo electrónico
+                    </label>
+
+                    <input
+                            type="email"
+                            class="form-control custom-input"
+                            placeholder="ejemplo@email.com"
+                    >
+
+                </div>
+
+                <div class="input-group-custom">
+
+                    <label>
+                        Contraseña
+                    </label>
+
+                    <input
+                            type="password"
+                            class="form-control custom-input"
+                            placeholder="********"
+                    >
+
+                </div>
+
+                <button class="btn btn-orange w-100">
+                    Entrar
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
