@@ -80,7 +80,7 @@
                     Editar Perfil
                 </button>
                 <button class="btn btn-orange">
-                    <a th:href="@{/entrenador/logout}" style="text-decoration: none; color: white;">
+                    <a th:href="@{/entrenador/logout}" style="text-decoration: none; color: white;" onclick="return confirm('¿Seguro que quieres cerrar sesion ?');">
                         Cerrar Sesion
                     </a>
                 </button>

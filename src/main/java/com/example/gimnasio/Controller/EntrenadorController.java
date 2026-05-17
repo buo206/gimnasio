@@ -56,7 +56,7 @@ public class EntrenadorController {
         EntrenadorDTO entrenador =(EntrenadorDTO) session.getAttribute("entrenadorLogueado");
 
         if (entrenador == null) {
-            return "redirect:/entrenador/loguin";
+            return "redirect:/entrenador";
         }
 
         model.addAttribute("entrenador", entrenador);
@@ -73,7 +73,7 @@ public class EntrenadorController {
         EntrenadorDTO entrenador =(EntrenadorDTO) session.getAttribute("entrenadorLogueado");
 
         if (entrenador == null) {
-            return "redirect:/entrenador/loguin";
+            return "redirect:/entrenador";
         }
 
         model.addAttribute("entrenador", entrenador);

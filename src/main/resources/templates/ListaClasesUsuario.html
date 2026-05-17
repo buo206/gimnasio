@@ -23,12 +23,8 @@
             </div>
 
             <h2 class="user-name" >
-                Juan Pérez
-            </h2>
-
-            <p class="user-role">
                 Usuario Premium
-            </p>
+            </h2>
         </div>
 
         <nav class="user-menu">
@@ -62,10 +58,10 @@
 
                 <thead>
                 <tr>
-                    <th>ID Clase</th>
-                    <th>Título Clase</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
+                    <td class="head">ID Clase</td>
+                    <td class="head">Título Clase</td>
+                    <td class="head">Estado</td>
+                    <td class="head">Acciones</td>
                 </tr>
                 </thead>
 
@@ -74,9 +70,9 @@
                     <td th:text="${registro.idClase()}"></td>
                     <td th:text="${registro.titulo()}"></td>
                     <th:block th:switch="${registro.estado()}">
-                        <td th:text="${registro.estado()}" th:case="${T(com.example.gimnasio.Models.Estado).CANCELADA}" class="status active-status"></td>
-                        <td th:text="${registro.estado()}" th:case="${T(com.example.gimnasio.Models.Estado).CONFIRMADA}" class="status completed-status"></td>
-                        <td th:text="${registro.estado()}" th:case="${T(com.example.gimnasio.Models.Estado).PENDIENTE}" class="status pending-status"></td>
+                        <td th:text="${registro.estado()}" th:case="${T(com.example.gimnasio.Models.Estado).CANCELADA}" style="color: rgb(241 12 12 ) ;"></td>
+                        <td th:text="${registro.estado()}" th:case="${T(com.example.gimnasio.Models.Estado).CONFIRMADA}" style="color: rgba(0,255,136) ;"></td>
+                        <td th:text="${registro.estado()}" th:case="${T(com.example.gimnasio.Models.Estado).PENDIENTE}" style="color: rgb(239 230 8) ;"></td>
                     </th:block>
                     <td>
                         <p>A</p>

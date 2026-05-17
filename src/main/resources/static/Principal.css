@@ -737,11 +737,13 @@ body {
 
 /* Tabla */
 .classes-table {
-    margin: 0;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 18px;
     color: white;
 }
 
-.classes-table thead th {
+.classes-table thead .head {
     border-bottom: 1px solid rgba(255,255,255,0.08);
     color: #ff8c42;
     font-weight: 700;

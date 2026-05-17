@@ -12,120 +12,8 @@
     <link href="/Principal.css" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.css">
-    <style>.classes-page {
-        min-height: 100vh;
-        padding: 50px;
-        background:
-                radial-gradient(circle at top left, rgba(255,102,0,0.08), transparent 25%),
-                #0f0f0f;
-        color: white;
-        width: 100%;
-        padding: 2%;
-    }
+    <link rel="stylesheet" href="/Principal.css">
 
-    /* Header */
-    .classes-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 40px;
-    }
-
-    .classes-header h1 {
-        font-size: 2.5rem;
-        font-weight: 800;
-        margin-bottom: 10px;
-    }
-
-    .classes-header p {
-        color: rgba(255,255,255,0.6);
-    }
-
-    /* Card */
-    .classes-card {
-        background: rgba(28,28,28,0.95);
-        border-radius: 28px;
-        padding: 30px;
-        border: 1px solid rgba(255,255,255,0.05);
-        box-shadow: 0 10px 35px rgba(0,0,0,0.35);
-    }
-
-    /* Tabla */
-    .classes-table {
-        margin: 0;
-        color: white;
-    }
-
-    .classes-table thead th {
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-        color: #ff8c42;
-        font-weight: 700;
-        padding-bottom: 20px;
-    }
-
-    .classes-table tbody tr {
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .classes-table tbody td {
-        background: transparent !important;
-        color: rgba(255,255,255,0.85);
-        padding: 22px 10px;
-    }
-
-    /* Título clase */
-    .class-title {
-        font-weight: 600;
-    }
-
-    /* Estados */
-    .status {
-        padding: 8px 16px;
-        border-radius: 30px;
-        font-size: 0.9rem;
-        font-weight: 700;
-    }
-
-    /* Activa */
-    .active-status {
-        background: rgba(0,255,136,0.12);
-        color: #00d47e;
-        border: 1px solid rgba(0,255,136,0.2);
-    }
-
-    /* Pendiente */
-    .pending-status {
-        background: rgba(255,166,0,0.12);
-        color: #ffb347;
-        border: 1px solid rgba(255,166,0,0.2);
-    }
-
-    /* Finalizada */
-    .completed-status {
-        background: rgba(255,102,0,0.12);
-        color: #ff8c42;
-        border: 1px solid rgba(255,102,0,0.2);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-
-        .classes-page {
-            padding: 30px 15px;
-        }
-
-        .classes-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 20px;
-        }
-
-        .classes-card {
-            overflow-x: auto;
-        }
-
-    }</style>
 </head>
 
 
@@ -193,11 +81,11 @@
 
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Título </th>
-                    <th>Fecha</th>
-                    <th>Hora</th><
-                    <th>Cupo</th>
+                    <td class="head">ID</td>
+                    <td class="head">Título </td>
+                    <td class="head">Fecha</td>
+                    <td class="head">Hora</td>
+                    <td class="head">Cupo</td>
 
                 </tr>
                 </thead>
