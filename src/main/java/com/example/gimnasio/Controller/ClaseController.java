@@ -25,7 +25,7 @@ public class ClaseController {
         EntrenadorDTO entrenador =(EntrenadorDTO) session.getAttribute("entrenadorLogueado");
 
         if (entrenador == null) {
-            return "redirect:/entrenador/loguin";
+            return "redirect:/entrenador";
         }
         try{
             List<ListaClaseEntrenadorDTO> clases = servicio.listaClaseEntrenador(entrenador.idEntrenador());
