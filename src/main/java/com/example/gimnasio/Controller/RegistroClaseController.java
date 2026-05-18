@@ -2,13 +2,16 @@ package com.example.gimnasio.Controller;
 
 
 import com.example.gimnasio.DTO.ListaRegistroClaseUsuarioDTO;
+import com.example.gimnasio.DTO.RegistroClaseDTO;
 import com.example.gimnasio.Models.Usuario;
 import com.example.gimnasio.Service.RegistroClaseService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -21,6 +24,30 @@ public class RegistroClaseController {
 
     public RegistroClaseController(RegistroClaseService servicio) {
         this.servicio = servicio;
+    }
+
+    @PostMapping("/crear/{idUsuario}")
+    public String crearRegistro(
+            @PathVariable int idUsuario,
+            @ModelAttribute RegistroClaseDTO registroClaseDTO,
+            HttpSession session,
+            RedirectAttributes redirectAttributes
+    ) {
+        Usuario usuario =
+                (Usuario) session.getAttribute("usuarioLogueado");
+
+        if (usuario == null) {
+            return "redirect:/usuario";
+        }
+
+        try {
+            servicio.crearRegistro(registroClaseDTO, idUsuario);
+            redirectAttributes.addFlashAttribute("mensaje", "Reserva creada correctamente");
+            return "redirect:/registroClase/listaClasesUsuario/" + idUsuario;
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/clase/listaClasesDisponibles/" + idUsuario;
+        }
     }
 
     @GetMapping("/listaClasesUsuario/{idUsuario}")

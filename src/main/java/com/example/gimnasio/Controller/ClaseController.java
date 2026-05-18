@@ -3,6 +3,8 @@ package com.example.gimnasio.Controller;
 import com.example.gimnasio.DTO.DetalleClaseDTO;
 import com.example.gimnasio.DTO.EntrenadorDTO;
 import com.example.gimnasio.DTO.ListaClaseEntrenadorDTO;
+import com.example.gimnasio.DTO.RegistroClaseDTO;
+import com.example.gimnasio.Models.Estado;
 import com.example.gimnasio.Models.Usuario;
 import com.example.gimnasio.Models.Clase;
 import com.example.gimnasio.Service.ClaseService;
@@ -74,12 +76,13 @@ public class ClaseController {
             HttpSession session,
             RedirectAttributes redirectAttributes
     ){
-        Usuario usuario =
-                (Usuario) session.getAttribute("usuarioLogueado");
+        Usuario usuario =(Usuario) session.getAttribute("usuarioLogueado");
 
         if (usuario == null) {
             return "redirect:/usuario";
         }
+        model.addAttribute("idUsuario", idUsuario);
+        model.addAttribute("registroClase", new RegistroClaseDTO(0, 0, 0, Estado.PENDIENTE));
         try{
             List<ListaClaseEntrenadorDTO> clases = servicio.listaClasesDisponiblesParaUsuario(idUsuario);
             model.addAttribute("listaClases", clases);
@@ -88,7 +91,6 @@ public class ClaseController {
             return "FormularioNuevoRegistroClase";
         }
 
-        model.addAttribute("idUsuario", idUsuario);
         return "FormularioNuevoRegistroClase";
     }
 }

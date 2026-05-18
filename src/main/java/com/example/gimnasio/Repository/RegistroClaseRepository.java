@@ -22,5 +22,6 @@ public interface RegistroClaseRepository extends JpaRepository<RegistroClase, In
         WHERE RB.usuario.idUsuario = :idUsuario """)
     List<ListaRegistroClaseUsuarioDTO> bucarClasesPorUsuario(int idUsuario);
 
+    boolean existsByClase_IdClaseAndRegistroUsuarioBono_Usuario_IdUsuario(int idClase, int idUsuario);
 
 }
