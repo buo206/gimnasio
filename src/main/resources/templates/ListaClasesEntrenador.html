@@ -1,117 +1,136 @@
-
-<!-- clases.html -->
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html lang="es" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Lista de Clases</title>
-
-    <!-- Bootstrap -->
     <link href="/Principal.css" rel="stylesheet">
+    <style>
+        /* Centrar la tabla */
+        .table-centered {
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="/Principal.css">
+        /* Contenedor de acciones en línea */
+        .actions-container {
+            display: flex;
+            gap: 8px;
+        }
 
+        /* Estilo base para los botones del listado */
+        .btn-action {
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-block;
+            text-align: center;
+        }
+
+        /* Botón Ver Detalle (Naranja) */
+        .btn-view {
+            background-color: #ff6b00;
+            color: white;
+        }
+
+        .btn-view:hover {
+            background-color: #e05e00;
+        }
+
+        /* Botón Editar (Gris oscuro/Antracita que combina con el sidebar) */
+        .btn-edit-dark {
+            background-color: #2b2d42;
+            color: white;
+        }
+
+        .btn-edit-dark:hover {
+            background-color: #1a1b29;
+        }
+
+        /* Badge sutil para el título del bono */
+        .bonus-tag {
+            background-color: #f1f3f5;
+            color: #495057;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid #dee2e6;
+        }
+
+        .fw-semibold {
+            font-weight: 600;
+        }
+    </style>
 </head>
-
-
 <body>
-<div class ="trainer-layout">
+<div class="trainer-layout">
     <aside class="trainer-sidebar">
-
         <div>
-
-            <div class="trainer-logo">
-                🏋️
-            </div>
-
-            <h2 class="trainer-name">
-                Entrenador Personal
-            </h2>
-
-
+            <div class="trainer-logo">🏋️</div>
+            <h2 class="trainer-name" th:text="${entrenador.nombre()}">Entrenador Personal</h2>
         </div>
 
         <nav class="trainer-menu">
-
-            <a th:href="@{/entrenador/home}">
-                Inicio
-            </a>
-
-            <a th:href="@{/entrenador/lista}" class="active">
-                Mis Clases
-            </a>
-
-            <a href="#">
-                Rutinas
-            </a>
-
-            <a href="#">
-                Horarios
-            </a>
-
-            <a href="#">
-                Ajustes
-            </a>
-
+            <a th:href="@{/entrenador/home}">Inicio</a>
+            <a th:href="@{/clase/listaClases}" class="active">Mis Clases</a>
+            <a href="#">Rutinas</a>
+            <a href="#">Horarios</a>
+            <a href="#">Ajustes</a>
         </nav>
-
     </aside>
-    <div class="classes-page">
-        <!-- Header -->
-        <div class="classes-header">
 
+    <div class="classes-page">
+        <div class="classes-header">
             <div>
                 <h1>Mis Clases</h1>
                 <p>Consulta el estado de tus clases reservadas</p>
             </div>
-
             <button class="btn btn-orange">
                 Nueva Reserva
             </button>
-
         </div>
 
-        <!-- Tabla -->
-        <div class="classes-card " >
-
-            <table th:if="${listaClases}" class="table classes-table align-middle"  style=" margin-left: auto; margin-right: auto;">
-
+        <div class="classes-card">
+            <table th:if="${listaClases}" class="table classes-table align-middle table-centered">
                 <thead>
                 <tr>
                     <td class="head">ID</td>
-                    <td class="head">Título </td>
-                    <td class="head">Fecha</td>
+                    <td class="head">Título</td>
+                    <td class="head">Especialidad / Bono</td> <td class="head">Fecha</td>
                     <td class="head">Hora</td>
                     <td class="head">Cupo</td>
-
+                    <td class="head">Acciones</td>
                 </tr>
                 </thead>
 
                 <tbody>
-                    <tr th:each="c : ${listaClases}">
-                        <td th:text="${c.idClase()}"></td>
-                        <td th:text="${c.titulo()}"></td>
-                        <td th:text="${c.fecha()}"></td>
-                        <td th:text="${c.hora()}"></td>
-                        <td th:text="${c.cupoMax()}"></td>
-                        <td>
-                            <button class="btn btn-orange">
-                                <a th:href="@{/clase/detalle/{id}(id=${c.idClase})} " style="text-decoration: none; color: white;" >Ver Detalle</a>
-                            </button>
-                        </td>
-                    </tr>
+                <tr th:each="c : ${listaClases}">
+                    <td th:text="${c.idClase()}"></td>
+                    <td th:text="${c.titulo()}" class="fw-semibold"></td>
+                    <td>
+                        <span class="bonus-tag" th:text="${c.tituloBono()}">Bono General</span>
+                    </td>
+                    <td th:text="${c.fecha()}"></td>
+                    <td th:text="${c.hora()}"></td>
+                    <td th:text="${c.cupoMax()}"></td>
+                    <td>
+                        <div class="actions-container">
+                            <a th:href="@{/clase/detalle/{id}(id=${c.idClase()})}" class="btn-action btn-view">
+                                Ver Detalle
+                            </a>
+                            <a th:href="@{/clase/editar/{id}(id=${c.idClase()})}" class="btn-action btn-edit-dark">
+                                Editar
+                            </a>
+                        </div>
+                    </td>
+                </tr>
                 </tbody>
-
             </table>
-
         </div>
-
     </div>
 </div>
-
-
 </body>
 </html>
