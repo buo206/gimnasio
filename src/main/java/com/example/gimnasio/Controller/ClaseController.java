@@ -43,6 +43,7 @@ public class ClaseController {
         model.addAttribute("entrenador", entrenador);
         return "ListaClasesEntrenador";
     }
+
     @GetMapping("/detalle/{idClase}")
     public String detalleClase(@PathVariable("idClase") int idClase,HttpSession session, Model model){
         EntrenadorDTO entrenador =(EntrenadorDTO) session.getAttribute("entrenadorLogueado");

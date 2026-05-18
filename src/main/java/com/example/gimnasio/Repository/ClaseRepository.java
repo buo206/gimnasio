@@ -31,20 +31,22 @@ public interface ClaseRepository extends JpaRepository<Clase, Integer> {
     List<DetalleClaseDTO> obtenerDetalleClase(int idClase);
 
     @Query("""
- SELECT DISTINCT new com.example.gimnasio.DTO.ListaClaseEntrenadorDTO(
-    c.idClase, c.titulo, c.fecha, c.hora, c.cupoMax)
- FROM Clase c
- JOIN RegistroUsuarioBono rub ON rub.tipoBono.idBono = c.idBono.idBono
- WHERE rub.usuario.idUsuario = :idUsuario
-   AND rub.usos < rub.tipoBono.numeroDeUsos
-   AND C.cupoMax < (SELECT COUNT(*) FROM RegistroClase rc2 WHERE rc2.clase.idClase = c.idClase)
-   AND NOT EXISTS (
-      SELECT rc.idRegistroClase
-      FROM RegistroClase rc
-      WHERE rc.clase.idClase = c.idClase
-        AND rc.registroUsuarioBono.usuario.idUsuario = :idUsuario
-   )
-""")
-    List<ListaClaseEntrenadorDTO> obtenerClasesDisponiblesPorEntrenadorYUsuario(int idUsuario);
+    SELECT DISTINCT new com.example.gimnasio.DTO.ListaClaseEntrenadorDTO(
+        c.idClase, c.titulo, c.fecha, c.hora, c.cupoMax)
+     FROM Clase c
+     JOIN RegistroUsuarioBono rub ON rub.tipoBono.idBono = c.idBono.idBono
+     WHERE rub.usuario.idUsuario = :idUsuario
+       AND rub.usos < rub.tipoBono.numeroDeUsos
+       AND c.cupoMax > (SELECT COUNT(*) FROM RegistroClase rc2 WHERE rc2.clase.idClase = c.idClase)
+       AND NOT EXISTS (
+          SELECT rc.idRegistroClase
+          FROM RegistroClase rc
+          WHERE rc.clase.idClase = c.idClase
+            AND rc.registroUsuarioBono.usuario.idUsuario = :idUsuario
+       )
+    """)
+    List<ListaClaseEntrenadorDTO> obtenerClasesDisponiblesPorUsuario(int idUsuario);
+
+
 }
 
