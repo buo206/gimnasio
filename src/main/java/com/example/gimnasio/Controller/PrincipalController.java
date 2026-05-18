@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PrincipalController {
     @GetMapping("")
     public String iniciar(Model model){
-        //return "redirect:/entrenador" ;
-        return "FormularioNuevoRegistroClase";
+        return "redirect:/entrenador" ;
     }
 }
