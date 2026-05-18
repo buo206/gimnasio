@@ -15,6 +15,10 @@ public class Clase {
     @Column(name = "id_clase")
     private int idClase ;
 
+    @ManyToOne
+    @JoinColumn(name = "idBono")
+    private TipoBono idBono ;
+
     @Column(name="fecha" ,length = 50 , nullable = false)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fecha ;
@@ -78,4 +82,11 @@ public class Clase {
 
     public void setTitulo(String titulo) {this.titulo = titulo;}
 
+    public TipoBono getIdBono() {
+        return idBono;
+    }
+
+    public void setIdBono(TipoBono idBono) {
+        this.idBono = idBono;
+    }
 }
