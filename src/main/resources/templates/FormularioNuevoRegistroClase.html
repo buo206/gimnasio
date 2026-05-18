@@ -38,28 +38,23 @@
         <form>
 
             <div class="row g-4">
-                <form th:action="@{/apuntarse}" method="get" class="col-md-6">
+                <div class="col-md-6">
+                    <label class="edit-label">
+                        Clases disponibles
+                    </label>
+                    <select class="form-select edit-input" id="seleccionado">
 
-                    <select class="form-select edit-input" name="idClase">
-                        <label class="edit-label">
-                            Clases disponibles
-                        </label>
                         <option
-                                th:each="clase : ${listaClases}"
-                                th:value="${clase.idClase()}"
-                                th:text="${clase.idClase()} + ' - ' + ${clase.titulo()} + ' | ' + ${clase.fecha()} + ' | ' + ${clase.hora()}">
+                            th:each="clase : ${listaClases}"
+                            th:value="${clase.idClase()}"
+                            th:text="${clase.idClase()} + ' - ' + ${clase.titulo()} + ' | ' + ${clase.fecha()} + ' | ' + ${clase.hora()}">
                         </option>
                     </select>
+                </div>
 
-                    <p th:if="${error}" th:text="${error}" style="color:red"></p>
+                <p th:if="${error}" th:text="${error}" style="color:red"></p>
 
-                    <button class="btn btn-orange" type="submit">
-                        <a th:href="@{'/registroClase/'+${}}" style="text-decoration: none; color: white;" onclick="return confirm('¿ Seguro que quiere apuntarse a esta clase ?');">Guardar</a>
-                    </button>
-                </form>
             </div>
-
-
 
             <!-- BOTONES -->
             <div class="edit-buttons">
