@@ -34,7 +34,7 @@ public class ClaseService {
     }
 
     public List<ListaClaseEntrenadorDTO> listaClasesDisponiblesParaUsuario(int idUsuario){
-        List<ListaClaseEntrenadorDTO> lista = repo.obtenerClasesDisponiblesPorEntrenadorYUsuario(idUsuario);
+        List<ListaClaseEntrenadorDTO> lista = repo.obtenerClasesDisponiblesPorUsuario(idUsuario);
         if(lista.isEmpty()){
             throw new RuntimeException("No hay clases disponibles para este usuario con ese entrenador");
         }

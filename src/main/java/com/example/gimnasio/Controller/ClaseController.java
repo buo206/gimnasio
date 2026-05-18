@@ -4,6 +4,8 @@ import com.example.gimnasio.DTO.DetalleClaseDTO;
 import com.example.gimnasio.DTO.EntrenadorDTO;
 import com.example.gimnasio.DTO.ListaClaseConTipoBonoDTO;
 import com.example.gimnasio.DTO.ListaClaseEntrenadorDTO;
+import com.example.gimnasio.DTO.RegistroClaseDTO;
+import com.example.gimnasio.Models.Estado;
 import com.example.gimnasio.Models.TipoBono;
 import com.example.gimnasio.Models.Usuario;
 import com.example.gimnasio.Models.Clase;
@@ -46,6 +48,7 @@ public class ClaseController {
         model.addAttribute("entrenador", entrenador);
         return "ListaClasesEntrenador";
     }
+
     @GetMapping("/detalle/{idClase}")
     public String detalleClase(@PathVariable("idClase") int idClase,HttpSession session, Model model){
         EntrenadorDTO entrenador =(EntrenadorDTO) session.getAttribute("entrenadorLogueado");
@@ -76,12 +79,13 @@ public class ClaseController {
             HttpSession session,
             RedirectAttributes redirectAttributes
     ){
-        Usuario usuario =
-                (Usuario) session.getAttribute("usuarioLogueado");
+        Usuario usuario =(Usuario) session.getAttribute("usuarioLogueado");
 
         if (usuario == null) {
             return "redirect:/usuario";
         }
+        model.addAttribute("idUsuario", idUsuario);
+        model.addAttribute("registroClase", new RegistroClaseDTO(0, 0, 0, Estado.PENDIENTE));
         try{
             List<ListaClaseEntrenadorDTO> clases = servicio.listaClasesDisponiblesParaUsuario(idUsuario);
             model.addAttribute("listaClases", clases);
@@ -90,8 +94,7 @@ public class ClaseController {
             return "FormularioNuevoRegistroClase";
         }
 
-        model.addAttribute("idUsuario", idUsuario);
-        return "FormularioClase";
+        return "FormularioNuevoRegistroClase";
     }
     @GetMapping("/editar/{idClase}")
     public String mostrarFormularioEditar(@PathVariable("idClase") int idClase, HttpSession session, Model model) {

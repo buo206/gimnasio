@@ -35,14 +35,17 @@
         </div>
 
         <!-- FORM -->
-        <form>
+        <form th:action="@{/registroClase/crear/{idUsuario}(idUsuario=${idUsuario})}" th:object="${registroClase}" method="post">
+            <input type="hidden" th:field="*{idRegistroClase}">
+            <input type="hidden" th:field="*{idRegistroBono}">
+            <input type="hidden" th:field="*{estado}">
 
             <div class="row g-4">
                 <div class="col-md-6">
                     <label class="edit-label">
                         Clases disponibles
                     </label>
-                    <select class="form-select edit-input" id="seleccionado">
+                    <select class="form-select edit-input" th:field="*{idClase}" id="seleccionado" required>
 
                         <option
                             th:each="clase : ${listaClases}"
@@ -51,22 +54,21 @@
                         </option>
                     </select>
                 </div>
-
                 <p th:if="${error}" th:text="${error}" style="color:red"></p>
+                <p th:if="${errorMensaje}" th:text="${errorMensaje}" style="color:red"></p>
+                <p th:if="${mensaje}" th:text="${mensaje}" style="color:green"></p>
 
+                <button class="btn btn-orange" type="submit" onclick="return confirm('¿ Seguro que quiere apuntarse a esta clase ?');">
+                    Guardar
+                </button>
             </div>
 
             <!-- BOTONES -->
             <div class="edit-buttons">
 
-                <button type="button" class="btn cancel-btn">
+                <button type="button" class="btn cancel-btn" th:onclick="|window.location.href='@{/registroClase/listaClasesUsuario/{idUsuario}(idUsuario=${idUsuario})}'|">
                     Cancelar
                 </button>
-
-                <button class="btn btn-orange">
-                    <a th:href="@{'/registroClase/'+${}}" style="text-decoration: none; color: white;" onclick="return confirm('¿ Seguro que quiere apuntarse a esta clase ?');">Guardar</a>
-                </button>
-
             </div>
 
         </form>

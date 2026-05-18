@@ -55,8 +55,7 @@ public class UsuarioController {
 
     @GetMapping("/home")
     public String home(HttpSession session, Model model) {
-        Usuario usuario =
-                (Usuario) session.getAttribute("usuarioLogueado");
+        Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
 
         if (usuario == null) {
             return "redirect:/usuario";
