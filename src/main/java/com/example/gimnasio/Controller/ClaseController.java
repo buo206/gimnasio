@@ -84,6 +84,7 @@ public class ClaseController {
             model.addAttribute("listaClases", clases);
         }catch (RuntimeException e){
             model.addAttribute("errorMensaje", e.getMessage());
+            return "FormularioNuevoRegistroClase";
         }
 
         model.addAttribute("idUsuario", idUsuario);

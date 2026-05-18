@@ -37,6 +37,7 @@ public interface ClaseRepository extends JpaRepository<Clase, Integer> {
  JOIN RegistroUsuarioBono rub ON rub.tipoBono.idBono = c.idBono.idBono
  WHERE rub.usuario.idUsuario = :idUsuario
    AND rub.usos < rub.tipoBono.numeroDeUsos
+   AND C.cupoMax < (SELECT COUNT(*) FROM RegistroClase rc2 WHERE rc2.clase.idClase = c.idClase)
    AND NOT EXISTS (
       SELECT rc.idRegistroClase
       FROM RegistroClase rc
