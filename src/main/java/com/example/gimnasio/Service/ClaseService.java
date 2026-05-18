@@ -39,6 +39,9 @@ public class ClaseService {
         }
         return lista;
     }
+    public void guardar(Clase clase){
+        repo.save(clase);
+    }
 
 
 }

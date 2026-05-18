@@ -8,7 +8,8 @@ public record ListaClaseEntrenadorDTO(
         String titulo,
         LocalDate fecha,
         LocalTime hora,
-        int cupoMax
+        int cupoMax,
+        String tituloBono
 ) {
 
 }

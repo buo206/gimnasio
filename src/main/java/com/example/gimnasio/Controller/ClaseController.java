@@ -10,9 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import org.hibernate.engine.spi.EntityEntry;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -89,5 +87,46 @@ public class ClaseController {
 
         model.addAttribute("idUsuario", idUsuario);
         return "FormularioNuevoRegistroClase";
+    }
+    @GetMapping("/editar/{idClase}")
+    public String mostrarFormularioEditar(@PathVariable("idClase") int idClase, HttpSession session, Model model) {
+        EntrenadorDTO entrenador = (EntrenadorDTO) session.getAttribute("entrenadorLogueado");
+        if (entrenador == null) {
+            return "redirect:/entrenador/loguin";
+        }
+
+        try {
+            Clase clase = servicio.buscarPorId(idClase);
+            model.addAttribute("clase", clase);
+        } catch (RuntimeException e) {
+            model.addAttribute("errorMensaje", e.getMessage());
+            return "redirect:/clase/listaClases";
+        }
+
+        model.addAttribute("entrenador", entrenador);
+        return "FormularioEditarClase";
+    }
+
+    @PostMapping("/actualizar")
+    public String actualizarClase(Clase clase, HttpSession session, RedirectAttributes redirectAttributes) {
+        EntrenadorDTO entrenador = (EntrenadorDTO) session.getAttribute("entrenadorLogueado");
+        if (entrenador == null) {
+            return "redirect:/entrenador/loguin";
+        }
+
+        try {
+            Clase claseOriginal = servicio.buscarPorId(clase.getIdClase());
+            claseOriginal.setTitulo(clase.getTitulo());
+            claseOriginal.setFecha(clase.getFecha());
+            claseOriginal.setHora(clase.getHora());
+            claseOriginal.setCupoMax(clase.getCupoMax());
+
+            servicio.guardar(claseOriginal);
+            redirectAttributes.addFlashAttribute("mensajeExito", "Clase actualizada");
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("errorMensaje", "Error al actualizar la clase:");
+        }
+
+        return "redirect:/clase/detalle/" + clase.getIdClase();
     }
 }

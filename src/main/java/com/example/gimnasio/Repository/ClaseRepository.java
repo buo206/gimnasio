@@ -46,5 +46,15 @@ public interface ClaseRepository extends JpaRepository<Clase, Integer> {
    )
 """)
     List<ListaClaseEntrenadorDTO> obtenerClasesDisponiblesPorEntrenadorYUsuario(int idUsuario);
+    @Query("""
+    SELECT new com.example.gimnasio.DTO.ListaClaseEntrenadorDTO(
+        c.idClase,c.titulo, c.fecha,c.hora, c.cupoMax, tb.tituloBono
+    ) 
+    FROM Clase c 
+    JOIN TipoBono tb ON c.idBono = tb
+    WHERE c.entrenador.idEntrenador = :id
+""")
+    List<ListaClaseEntrenadorDTO> obtenerClaseConTipoBono( Integer id);
 }
+
 
