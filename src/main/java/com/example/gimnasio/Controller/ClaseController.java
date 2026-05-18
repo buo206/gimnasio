@@ -65,47 +65,28 @@ public class ClaseController {
         return "DetalleClaseEntrenador";
     }
 
+
     @GetMapping("/listaClasesDisponibles/{idUsuario}")
-    public String listarEntrenadores(
+    public String listarClasesDisponibles(
+            @PathVariable int idUsuario,
             Model model ,
             HttpSession session,
-            RedirectAttributes redirectAttributes,
-            @PathVariable String idUsuario){
+            RedirectAttributes redirectAttributes
+    ){
         Usuario usuario =
                 (Usuario) session.getAttribute("usuarioLogueado");
 
         if (usuario == null) {
             return "redirect:/usuario";
         }
-
-
         try{
-            List<EntrenadorDTO> entrenadores = servicio.listaEntrenadores();
-            model.addAttribute("listaEntrenadores", entrenadores);
-            model.addAttribute("idUsuario", idUsuario);
-
-        }catch (RuntimeException e){
-            model.addAttribute("errorMensaje", e.getMessage());
-        }
-
-        return "ListaClasesEntrenador";
-    }
-
-    @GetMapping("/listaClasesDisponibles/{idEntrenador}/{idUsuario}")
-    public String listarClasesDisponibles(
-            @PathVariable int idEntrenador,
-            @PathVariable int idUsuario,
-            Model model
-    ){
-        try{
-            List<ListaClaseEntrenadorDTO> clases = servicio.listaClasesDisponiblesParaUsuario(idEntrenador, idUsuario);
+            List<ListaClaseEntrenadorDTO> clases = servicio.listaClasesDisponiblesParaUsuario(idUsuario);
             model.addAttribute("listaClases", clases);
         }catch (RuntimeException e){
             model.addAttribute("errorMensaje", e.getMessage());
         }
 
-        model.addAttribute("idEntrenador", idEntrenador);
         model.addAttribute("idUsuario", idUsuario);
-        return "ListaClasesEntrenador";
+        return "FormularioNuevoRegistroClase";
     }
 }

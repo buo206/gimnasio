@@ -13,11 +13,9 @@ import java.util.List;
 @Service
 public class ClaseService {
     private final ClaseRepository repo;
-    private final EntrenadorRepository repoEntrenador;
 
-    public ClaseService(ClaseRepository repo, EntrenadorRepository repoEntrenador) {
+    public ClaseService(ClaseRepository repo) {
         this.repo = repo;
-        this.repoEntrenador = repoEntrenador;
     }
     public List<ListaClaseEntrenadorDTO> listaClaseEntrenador(int idEntrenador){
         List<ListaClaseEntrenadorDTO> lista = repo.obtenerlista(idEntrenador);
@@ -34,19 +32,13 @@ public class ClaseService {
         return repo.obtenerDetalleClase(idClase);
     }
 
-    public List<ListaClaseEntrenadorDTO> listaClasesDisponiblesParaUsuario(int idEntrenador, int idUsuario){
-        List<ListaClaseEntrenadorDTO> lista = repo.obtenerClasesDisponiblesPorEntrenadorYUsuario(idEntrenador, idUsuario);
+    public List<ListaClaseEntrenadorDTO> listaClasesDisponiblesParaUsuario(int idUsuario){
+        List<ListaClaseEntrenadorDTO> lista = repo.obtenerClasesDisponiblesPorEntrenadorYUsuario(idUsuario);
         if(lista.isEmpty()){
             throw new RuntimeException("No hay clases disponibles para este usuario con ese entrenador");
         }
         return lista;
     }
 
-    public List<EntrenadorDTO> listaEntrenadores(){
-        List<EntrenadorDTO> lista = repoEntrenador.findAllEntrenadores();
-        if(lista.isEmpty()){
-            throw new RuntimeException("No hay entrenadores disponibles");
-        }
-        return lista ;
-    }
+
 }

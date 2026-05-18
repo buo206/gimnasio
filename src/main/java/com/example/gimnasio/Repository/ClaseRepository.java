@@ -35,8 +35,7 @@ public interface ClaseRepository extends JpaRepository<Clase, Integer> {
     c.idClase, c.titulo, c.fecha, c.hora, c.cupoMax)
  FROM Clase c
  JOIN RegistroUsuarioBono rub ON rub.tipoBono.idBono = c.idBono.idBono
- WHERE c.entrenador.idEntrenador = :idEntrenador
-   AND rub.usuario.idUsuario = :idUsuario
+ WHERE rub.usuario.idUsuario = :idUsuario
    AND rub.usos < rub.tipoBono.numeroDeUsos
    AND NOT EXISTS (
       SELECT rc.idRegistroClase
@@ -45,9 +44,6 @@ public interface ClaseRepository extends JpaRepository<Clase, Integer> {
         AND rc.registroUsuarioBono.usuario.idUsuario = :idUsuario
    )
 """)
-    List<ListaClaseEntrenadorDTO> obtenerClasesDisponiblesPorEntrenadorYUsuario(
-            @Param("idEntrenador") Integer idEntrenador,
-            @Param("idUsuario") Integer idUsuario
-    );
+    List<ListaClaseEntrenadorDTO> obtenerClasesDisponiblesPorEntrenadorYUsuario(int idUsuario);
 }
 

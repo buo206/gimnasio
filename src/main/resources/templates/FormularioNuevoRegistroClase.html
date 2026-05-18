@@ -19,7 +19,6 @@
 
     <!-- CARD -->
     <div class="edit-class-card">
-
         <!-- HEADER -->
         <div class="edit-header">
 
@@ -39,55 +38,22 @@
         <form>
 
             <div class="row g-4">
-
-
-                <div class="col-md-6">
-                    <label class="edit-label">
-                        Entreanador
-                    </label>
-                    <select class="form-select edit-input">
-
-                        <option selected disabled>
-                            Selecciona un entrenador
-                        </option>
-
-                        <option value="1">
-                            Full Body Training
-                        </option>
-
-                        <option value="2">
-                            Yoga Relax
-                        </option>
-
-                        <option value="3">
-                            HIIT Cardio
-                        </option>
-                    </select>
-                </div>
-
                 <div class="col-md-6">
                     <label class="edit-label">
                         Clases disponibles
                     </label>
                     <select class="form-select edit-input">
 
-                        <option selected disabled>
-                            Selecciona una clase
-                        </option>
-
-                        <option value="1">
-                            Full Body Training
-                        </option>
-
-                        <option value="2">
-                            Yoga Relax
-                        </option>
-
-                        <option value="3">
-                            HIIT Cardio
+                        <option th:each="clase : ${listaClases}">
+                            <p th:text="${clase.idClase()}"></p>
+                            <p th:text="${clase.titulo()}"></p>
+                            <p th:text="${clase.fecha()}"></p>
+                            <p th:text="${clase.hora()}"></p>
                         </option>
                     </select>
                 </div>
+
+                <p th:if="${error}" th:text="${error}" style="color:red"></p>
 
             </div>
 
