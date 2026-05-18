@@ -97,6 +97,11 @@
                         <td th:text="${c.fecha()}"></td>
                         <td th:text="${c.hora()}"></td>
                         <td th:text="${c.cupoMax()}"></td>
+                        <td>
+                            <button class="btn btn-orange">
+                                <a th:href="@{/clase/detalle/{id}(id=${c.idClase})} " style="text-decoration: none; color: white;" >Ver Detalle</a>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
 

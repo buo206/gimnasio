@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detalle de la Clase</title>
+    <link href="/Principal.css" rel="stylesheet">
+    <style>
+        .btn-back {
+            text-decoration: none;
+            color: white;
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 4px;
+            background-color: #ff6b00;
+        }
+
+        .alert-danger {
+            color: red;
+            margin-bottom: 20px;
+        }
+
+        /* --- Badge de sesión --- */
+        .badge-orange {
+            background-color: #ff6b00;
+            color: white;
+        }
+
+        .students-table th {
+            padding: 12px;
+            color: #495057;
+        }
+
+
+        .student-status-cell {
+            padding: 15px 12px;
+        }
+
+        /* --- Badges de estados con colores dinámicos --- */
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .status-confirmed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-canceled {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="trainer-layout">
+
+    <aside class="trainer-sidebar">
+        <div>
+            <div class="trainer-logo">
+                🏋️
+            </div>
+            <h2 class="trainer-name" th:text="${entrenador.nombre()}">
+                Entrenador
+            </h2>
+        </div>
+
+        <nav class="trainer-menu">
+            <a th:href="@{/entrenador/home}">
+                Inicio
+            </a>
+            <a th:href="@{/clase/listaClases}" class="active">
+                Mis Clases
+            </a>
+            <a href="#">
+                Rutinas
+            </a>
+            <a href="#">
+                Horarios
+            </a>
+            <a href="#">
+                Ajustes
+            </a>
+        </nav>
+    </aside>
+
+    <main class="trainer-content">
+
+        <div class="trainer-header">
+            <div>
+                <h1 th:text="'Clase: ' + ${clase.titulo}">
+                    Perfil de la Clase
+                </h1>
+                <p>
+                    Control de asistencia y gestión de alumnos inscritos
+                </p>
+            </div>
+
+            <div>
+                <button class="btn btn-orange">
+                    <a th:href="@{/clase/listaClases}" style="text-decoration: none; color: white;">
+                        Volver al Listado
+                    </a>
+                </button>
+            </div>
+        </div>
+
+        <div th:if="${errorMensaje}" class="alert alert-danger" th:text="${errorMensaje}"></div>
+
+        <div class="row g-4" th:if="${clase}">
+
+            <div class="col-lg-4">
+                <div class="trainer-card">
+                    <div class="profile-card">
+                        <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1200&auto=format&fit=crop"
+                             class="trainer-avatar"
+                             alt="Clase de Gimnasio">
+
+                        <h3 th:text="${clase.titulo}">
+                            Clase
+                        </h3>
+
+                        <span class="trainer-badge badge-orange">
+                            Sesión Activa
+                        </span>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="col-md-4">
+                            <h2 >Fecha</h2>
+                            <p th:text="${clase.fecha}"></p>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <h2>Horario</h2>
+                            <p th:text="${clase.hora}"></p>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <h2>Cupo Máximo</h2>
+                            <p th:text="${clase.cupoMax} + ' Alumnos'"></p>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <h2>Profesor</h2>
+                            <p th:text="${entrenador.nombre() + ' ' + entrenador.apellidos()}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="classes-card " >
+                <table th:if="${listaUsuarios}" class="table classes-table align-middle"  style=" margin-left: auto; margin-right: auto;">
+                        <thead>
+                        <tr>
+                            <th class="head">Alumno</th>
+                            <th class="head">Bono Utilizado</th>
+                            <th class="head">Estado Reserva</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="Usuario : ${listaUsuarios}">
+
+                            <td th:text="${Usuario.nombre + ' ' + Usuario.apellidos}">Juan Pérez</td>
+                            <td th:text="${Usuario.tipoBono}">Bono Pilates</td>
+                            <td class="student-status-cell" th:switch="${Usuario.estado.name()}">
+                                <span th:case="'CANCELADA'" class="status-badge status-canceled" th:text="${Usuario.estado}"></span>
+                                <span th:case="'CONFIRMADA'" class="status-badge status-confirmed" th:text="${Usuario.estado}"></span>
+                                <span th:case="'PENDIENTE'" class="status-badge status-pending" th:text="${Usuario.estado}"></span>
+                            </td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+
+        </div>
+    </main>
+</div>
+</body>
+</html>
