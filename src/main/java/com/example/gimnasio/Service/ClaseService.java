@@ -2,6 +2,7 @@ package com.example.gimnasio.Service;
 
 import com.example.gimnasio.DTO.EntrenadorDTO;
 import com.example.gimnasio.DTO.DetalleClaseDTO;
+import com.example.gimnasio.DTO.ListaClaseConTipoBonoDTO;
 import com.example.gimnasio.DTO.ListaClaseEntrenadorDTO;
 import com.example.gimnasio.Models.Clase;
 import com.example.gimnasio.Repository.ClaseRepository;
@@ -17,8 +18,8 @@ public class ClaseService {
     public ClaseService(ClaseRepository repo) {
         this.repo = repo;
     }
-    public List<ListaClaseEntrenadorDTO> listaClaseEntrenador(int idEntrenador){
-        List<ListaClaseEntrenadorDTO> lista = repo.obtenerlista(idEntrenador);
+    public List<ListaClaseConTipoBonoDTO> listaClaseEntrenador(int idEntrenador){
+        List<ListaClaseConTipoBonoDTO> lista = repo.obtenerClaseConTipoBono(idEntrenador);
         if(lista.isEmpty()){
             throw new RuntimeException("No se puede ver la lista de Clases");
         }

@@ -60,6 +60,15 @@
                     </label>
                     <input type="number" th:field="*{cupoMax}" min="1" class="form-control edit-input" id="cupoMax" required />
                 </div>
+                <div class="form-group">
+                    <label for="tipoBono">Tipo de Bono para la Clase:</label>
+                    <select id="tipoBono" th:field="*{idBono}" class="form-select edit-input" required>
+                        <option th:each="bono : ${listaBonos}"
+                                th:value="${bono.idBono}"
+                                th:text="${bono.tituloBono}">
+                        </option>
+                    </select>
+                </div>
 
             </div>
 
@@ -70,10 +79,11 @@
             </div>
 
             <div class="edit-buttons">
-
-                <a th:href="@{/clase/listaClases}" class="btn cancel-btn" style="text-decoration: none; line-height: 24px;">
-                    Cancelar
-                </a>
+                <button  class="btn cancel-btn">
+                    <a th:href="@{/clase/listaClases}" style="color: white; text-decoration: none" >
+                        Cancelar
+                    </a>
+                </button>
 
                 <button type="submit" class="btn btn-orange" style="color: white;" onclick="return confirm('¿Seguro que quiere guardar los cambios en esta clase?');">
                     Guardar Cambios

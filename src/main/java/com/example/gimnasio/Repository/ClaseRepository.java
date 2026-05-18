@@ -1,6 +1,7 @@
 package com.example.gimnasio.Repository;
 
 import com.example.gimnasio.DTO.DetalleClaseDTO;
+import com.example.gimnasio.DTO.ListaClaseConTipoBonoDTO;
 import com.example.gimnasio.DTO.ListaClaseEntrenadorDTO;
 import com.example.gimnasio.DTO.ListaRegistroClaseUsuarioDTO;
 import com.example.gimnasio.Models.Clase;
@@ -17,7 +18,7 @@ public interface ClaseRepository extends JpaRepository<Clase, Integer> {
  FROM Clase c 
  WHERE c.entrenador.idEntrenador = :id
 """)
-    List<ListaClaseEntrenadorDTO> obtenerlista(Integer id);
+    List<ListaClaseEntrenadorDTO> obtenerlista(int id);
 
     @Query("""
     SELECT new com.example.gimnasio.DTO.DetalleClaseDTO(
@@ -37,7 +38,7 @@ public interface ClaseRepository extends JpaRepository<Clase, Integer> {
  JOIN RegistroUsuarioBono rub ON rub.tipoBono.idBono = c.idBono.idBono
  WHERE rub.usuario.idUsuario = :idUsuario
    AND rub.usos < rub.tipoBono.numeroDeUsos
-   AND C.cupoMax < (SELECT COUNT(*) FROM RegistroClase rc2 WHERE rc2.clase.idClase = c.idClase)
+   AND c.cupoMax < (SELECT COUNT(*) FROM RegistroClase rc2 WHERE rc2.clase.idClase = c.idClase)
    AND NOT EXISTS (
       SELECT rc.idRegistroClase
       FROM RegistroClase rc
@@ -46,15 +47,14 @@ public interface ClaseRepository extends JpaRepository<Clase, Integer> {
    )
 """)
     List<ListaClaseEntrenadorDTO> obtenerClasesDisponiblesPorEntrenadorYUsuario(int idUsuario);
+
     @Query("""
-    SELECT new com.example.gimnasio.DTO.ListaClaseEntrenadorDTO(
+    SELECT new com.example.gimnasio.DTO.ListaClaseConTipoBonoDTO(
         c.idClase,c.titulo, c.fecha,c.hora, c.cupoMax, tb.tituloBono
-    ) 
-    FROM Clase c 
-    JOIN TipoBono tb ON c.idBono = tb
+    )FROM Clase c JOIN TipoBono tb ON c.idBono = tb
     WHERE c.entrenador.idEntrenador = :id
 """)
-    List<ListaClaseEntrenadorDTO> obtenerClaseConTipoBono( Integer id);
+    List<ListaClaseConTipoBonoDTO> obtenerClaseConTipoBono(int id);
 }
 
 
