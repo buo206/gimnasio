@@ -35,7 +35,28 @@ public class RegistroClaseController {
         try {
             List<ListaRegistroClaseUsuarioDTO>  listaClases= servicio.listarRegistroPorUsuario(idUsuario);
             model.addAttribute("listaClases", listaClases);
+            model.addAttribute("idUsuario", idUsuario);
             return "ListaClasesUsuario";
+
+        } catch (RuntimeException e) {
+            model.addAttribute("error", e.getMessage());
+            return "ListaClasesUsuario";
+        }
+
+    }
+
+    @GetMapping("/eliminarRegistro/{idRegistroClase}/{idUsuario}")
+    public String eliminarRegistro(@PathVariable int idRegistroClase , @PathVariable int idUsuario, HttpSession session, Model model , RedirectAttributes redirectAttributes) {
+        Usuario usuario =
+                (Usuario) session.getAttribute("usuarioLogueado");
+
+        if (usuario == null) {
+            return "redirect:/usuario";
+        }
+
+        try {
+            servicio.borrarRegistro(idRegistroClase);
+            return "redirect:/registroClase/listaClasesUsuario/"+idUsuario;
 
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());

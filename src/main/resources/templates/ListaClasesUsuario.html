@@ -60,6 +60,8 @@
                 <tr>
                     <td class="head">ID Clase</td>
                     <td class="head">Título Clase</td>
+                    <td class="head">Fecha</td>
+                    <td class="head">Hora</td>
                     <td class="head">Estado</td>
                     <td class="head">Acciones</td>
                 </tr>
@@ -69,13 +71,17 @@
                 <tr th:each="registro : ${listaClases}">
                     <td th:text="${registro.idClase()}"></td>
                     <td th:text="${registro.titulo()}"></td>
+                    <td th:text="${registro.fecha()}"></td>
+                    <td th:text="${registro.hora()}"></td>
                     <th:block th:switch="${registro.estado()}">
                         <td th:text="${registro.estado()}" th:case="${T(com.example.gimnasio.Models.Estado).CANCELADA}" style="color: rgb(241 12 12 ) ;"></td>
                         <td th:text="${registro.estado()}" th:case="${T(com.example.gimnasio.Models.Estado).CONFIRMADA}" style="color: rgba(0,255,136) ;"></td>
                         <td th:text="${registro.estado()}" th:case="${T(com.example.gimnasio.Models.Estado).PENDIENTE}" style="color: rgb(239 230 8) ;"></td>
                     </th:block>
                     <td>
-                        <p>A</p>
+                        <button class="btn btn-orange">
+                            <a th:href="@{'/registroClase/eliminarRegistro/'+${registro.idClase()}+'/'+${idUsuario}}" style="text-decoration: none; color: white;" onclick="return confirm('¿ Seguro que quiere eliminar este registro de clase ?');">🗑️Borrar </a>
+                        </button>
                     </td>
                 </tr>
                 </tbody>
