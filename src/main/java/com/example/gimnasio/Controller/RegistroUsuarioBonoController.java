@@ -46,6 +46,7 @@ public class RegistroUsuarioBonoController {
 
     @PostMapping("/comprarTipo1")
     public String comprarTipo1(
+            Model model ,
             HttpSession session,
             RedirectAttributes redirectAttributes
     ) {
@@ -57,16 +58,17 @@ public class RegistroUsuarioBonoController {
 
         try {
             servicio.crearBonoTipo1(usuario.getIdUsuario());
-            redirectAttributes.addFlashAttribute("mensaje", "Compra Exitosa");
-            return "redirect:/usuario";
+            model.addAttribute("mensaje", "Compra Exitosa");
+            return "ComprarBonos";
         } catch (RuntimeException e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/usuario";
+            model.addAttribute("error", e.getMessage());
+            return "ComprarBonos";
         }
     }
 
     @PostMapping("/comprarTipo2")
     public String comprarTipo2(
+            Model model ,
             HttpSession session,
             RedirectAttributes redirectAttributes
     ) {
@@ -78,11 +80,11 @@ public class RegistroUsuarioBonoController {
 
         try {
             servicio.crearBonoTipo2(usuario.getIdUsuario());
-            redirectAttributes.addFlashAttribute("mensaje", "Compra Exitosa");
-            return "redirect:/usuario";
+            model.addAttribute("mensaje", "Compra Exitosa");
+            return "ComprarBonos";
         } catch (RuntimeException e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/usuario";
+            model.addAttribute("error", e.getMessage());
+            return "ComprarBonos";
         }
     }
 

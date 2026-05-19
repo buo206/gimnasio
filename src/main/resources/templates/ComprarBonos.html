@@ -16,6 +16,8 @@
     <div class="bonos-header">
         <h1>Elige tu bono</h1>
         <p>Accede a nuestros planes y mejora tu entrenamiento</p>
+        <p th:if="${error}" th:text="${error}" style="color:red"></p>
+        <p th:if="${mensaje}" th:text="${mensaje}" style="color:#0bfb03"></p>
     </div>
 
     <div class="container">

@@ -6,29 +6,7 @@
 
     <title>Rutinas - Gestión de Usuarios</title>
     <link href="/Principal.css" rel="stylesheet">
-    <style>
-        .students-table th {
-            padding: 12px;
-            color: #495057;
-        }
 
-        .user-action-btn {
-            background-color: #ff6b00;
-            color: white;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: background-color 0.2s;
-        }
-
-        .user-action-btn:hover {
-            background-color: #e05e00;
-        }
     </style>
 </head>
 <body>
@@ -55,12 +33,6 @@
             <a th:href="@{/entrenador/usuarios}" class="active">
                 Mis Usuarios
             </a>
-            <a href="#">
-                Horarios
-            </a>
-            <a href="#">
-                Ajustes
-            </a>
         </nav>
     </aside>
 
@@ -81,14 +53,14 @@
         <div th:if="${errorMensaje}" class="alert alert-danger" th:text="${errorMensaje}" style="color: red; margin-bottom: 20px;"></div>
 
         <div class="classes-card" th:if="${listaUsuarios}">
-            <table class="table classes-table align-middle" style="margin-left: auto; margin-right: auto;">
+            <table class="table classes-table align-middle table-centered" style="margin-left: auto; margin-right: auto;">
                 <thead>
                 <tr>
-                    <th class="head">ID</th>
-                    <th class="head">Nombre Completo</th>
-                    <th class="head">DNI</th>
-                    <th class="head">Correo Electrónico</th>
-                    <th class="head">Teléfono</th>
+                    <td class="head">ID</td>
+                    <td class="head">Nombre Completo</td>
+                    <td class="head">DNI</td>
+                    <td class="head">Correo Electrónico</td>
+                    <td class="head">Teléfono</td>
                 </tr>
                 </thead>
                 <tbody>

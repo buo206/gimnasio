@@ -89,7 +89,7 @@ public class EntrenadorController {
     public String listarUsuariosGimnasio(HttpSession session, Model model) {
         EntrenadorDTO entrenador = (EntrenadorDTO) session.getAttribute("entrenadorLogueado");
         if (entrenador == null) {
-            return "redirect:/entrenador/loguin";
+            return "redirect:/entrenador";
         }
 
         try {
@@ -106,7 +106,7 @@ public class EntrenadorController {
     public String editarPerfilEntrenador(HttpSession session, Model model) {
         EntrenadorDTO entrenador = (EntrenadorDTO) session.getAttribute("entrenadorLogueado");
         if (entrenador == null) {
-            return "redirect:/entrenador/loguin";
+            return "redirect:/entrenador";
         }
         Entrenador entrenadorModelo = servicio.buscarPorId(entrenador.idEntrenador());
         model.addAttribute("entrenador", entrenadorModelo);
@@ -117,7 +117,7 @@ public class EntrenadorController {
     public String guardarPerfil(HttpSession session, Model model,Entrenador entrenadorModelo, RedirectAttributes redirectAttributes){
         EntrenadorDTO entrenador = (EntrenadorDTO) session.getAttribute("entrenadorLogueado");
         if (entrenador == null) {
-            return "redirect:/entrenador/loguin";
+            return "redirect:/entrenador";
         }
         servicio.guardar(entrenadorModelo);
 
