@@ -194,6 +194,7 @@ public class ClaseController {
         }
         return "redirect:/clase/detalle/" + idClase;
     }
+
     @PostMapping("/detalle/{idClase}/registroBono/{idRegistroBono}/confirmar")
     public String confirmarUsuario(@PathVariable("idClase") int idClase,@PathVariable("idRegistroBono") int idRegistroBono, RedirectAttributes redirectAttributes){
         try {
@@ -203,6 +204,7 @@ public class ClaseController {
         }
         return "redirect:/clase/detalle/" + idClase;
     }
+
     @PostMapping("/detalle/{idClase}/registroBono/{idRegistroBono}/cancelar")
     public String cancelarUsuario(@PathVariable("idClase") int idClase,@PathVariable("idRegistroBono") int idRegistroBono,RedirectAttributes redirectAttributes){
         try {
