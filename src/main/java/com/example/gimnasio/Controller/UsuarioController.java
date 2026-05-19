@@ -96,27 +96,15 @@ public class UsuarioController {
 
     }
     @PostMapping("/guardarPerfil")
-    public String guardarPerfil(HttpSession session, Model model,Usuario usuarioModelo, RedirectAttributes redirectAttributes){
+    public String guardarPerfil(HttpSession session, Model model,@ModelAttribute("usuario")Usuario usuarioModelo, RedirectAttributes redirectAttributes){
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
 
         if (usuario == null) {
             return "redirect:/usuario";
         }
+
         servicio.guardar(usuarioModelo);
-
-        Usuario nuevoUsuario = new Usuario(
-                usuarioModelo.getIdUsuario(),
-                usuarioModelo.getNombre(),
-                usuarioModelo.getApellidos(),
-                usuarioModelo.getDireccion(),
-                usuarioModelo.getEmail(),
-                usuarioModelo.getPassword(),
-                usuarioModelo.getDni(),
-                usuarioModelo.getTelefono()
-
-        );
-        servicio.guardar(nuevoUsuario);
-        session.setAttribute("usuarioLogueado",nuevoUsuario);
+        session.setAttribute("usuarioLogueado",usuarioModelo);
         redirectAttributes.addFlashAttribute("mensajeExito", "Perfil actualizado correctamente");
         return "redirect:/usuario/home";
     }
