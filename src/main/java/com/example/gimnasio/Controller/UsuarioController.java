@@ -2,6 +2,7 @@ package com.example.gimnasio.Controller;
 
 import com.example.gimnasio.DTO.EntrenadorDTO;
 import com.example.gimnasio.DTO.LoguinDTO;
+import com.example.gimnasio.Models.Entrenador;
 import com.example.gimnasio.Models.Usuario;
 import com.example.gimnasio.Repository.UsuarioRepository;
 import com.example.gimnasio.Service.UsuarioService;
@@ -72,6 +73,43 @@ public class UsuarioController {
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/usuario";
+    }
+    @GetMapping("/editarPerfil")
+    public String editarPerfilUsuario(HttpSession session, Model model) {
+        Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
+
+        if (usuario == null) {
+            return "redirect:/usuario";
+        }
+        Usuario usuarioModelo = servicio.buscarPorId(usuario.getIdUsuario());
+        model.addAttribute("usuario", usuarioModelo);
+        return "EditarUsuario";
+
+    }
+    @PostMapping("/guardarPerfil")
+    public String guardarPerfil(HttpSession session, Model model,Usuario usuarioModelo, RedirectAttributes redirectAttributes){
+        Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
+
+        if (usuario == null) {
+            return "redirect:/usuario";
+        }
+        servicio.guardar(usuarioModelo);
+
+        Usuario nuevoUsuario = new Usuario(
+                usuarioModelo.getIdUsuario(),
+                usuarioModelo.getNombre(),
+                usuarioModelo.getApellidos(),
+                usuarioModelo.getDireccion(),
+                usuarioModelo.getEmail(),
+                usuarioModelo.getPassword(),
+                usuarioModelo.getDni(),
+                usuarioModelo.getTelefono()
+
+        );
+        servicio.guardar(nuevoUsuario);
+        session.setAttribute("usuarioLogueado",nuevoUsuario);
+        redirectAttributes.addFlashAttribute("mensajeExito", "Perfil actualizado correctamente");
+        return "redirect:/usuario/home";
     }
 
 }

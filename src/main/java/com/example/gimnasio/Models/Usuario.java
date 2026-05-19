@@ -32,6 +32,10 @@ public class Usuario {
     @Column(name = "telefono" ,length = 14)
     private String telefono;
 
+    public Usuario(int idUsuario, String nombre, String apellidos, String direccion, String email, String password, String dni, String telefono) {
+    }
+    public Usuario(){}
+
     public int getIdUsuario() {
         return idUsuario;
     }

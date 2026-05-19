@@ -77,7 +77,9 @@
 
             <div>
                 <button class="btn btn-orange" style="text-decoration: none; color: white;">
-                    Editar Perfil
+                    <a th:href="@{/entrenador/editarPerfil}" style="text-decoration: none; color: white;" >
+                        Editar Perfil
+                    </a>
                 </button>
                 <button class="btn btn-orange">
                     <a th:href="@{/entrenador/logout}" style="text-decoration: none; color: white;" onclick="return confirm('¿Seguro que quieres cerrar sesion ?');">

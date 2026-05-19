@@ -1,6 +1,7 @@
 package com.example.gimnasio.Service;
 
 import com.example.gimnasio.DTO.LoguinDTO;
+import com.example.gimnasio.Models.Entrenador;
 import com.example.gimnasio.Models.Usuario;
 import com.example.gimnasio.Repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
@@ -25,4 +26,11 @@ public class UsuarioService {
         }
         return lista;
     }
+    public Usuario buscarPorId(int idUsuario){
+        return repo.findById(idUsuario).orElseThrow(() -> new RuntimeException("No existe ningun usuario con ese email o contraseña"));
+    }
+    public void guardar(Usuario usuario){
+        repo.save(usuario);
+    }
+
 }
