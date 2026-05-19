@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RegistroClaseRepository extends JpaRepository<RegistroClase, Integer> {
 
@@ -23,5 +24,8 @@ public interface RegistroClaseRepository extends JpaRepository<RegistroClase, In
     List<ListaRegistroClaseUsuarioDTO> bucarClasesPorUsuario(int idUsuario);
 
     boolean existsByClase_IdClaseAndRegistroUsuarioBono_Usuario_IdUsuario(int idClase, int idUsuario);
+
+    List<RegistroClase> findByClaseIdClase(int idClase);
+    Optional<RegistroClase> findByClaseIdClaseAndRegistroUsuarioBonoIdRegistroBono(int idClase, int idRegistroBono);
 
 }

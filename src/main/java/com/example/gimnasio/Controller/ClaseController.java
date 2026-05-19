@@ -184,4 +184,32 @@ public class ClaseController {
             model.addAttribute("entrenador", entrenador);
             return "FormularioClase";
         }
+    @PostMapping("/detalle/{idClase}/terminar")
+    public String terminarClaseAction(@PathVariable("idClase")int idClase, RedirectAttributes redirectAttributes) {
+        try {
+            servicio.terminarClase(idClase);
+            redirectAttributes.addFlashAttribute("mensajeExito", "Clase finalizada. Todas las reservas han pasado a CANCELADA.");
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("errorMensaje", "Error al finalizar la clase: " + e.getMessage());
+        }
+        return "redirect:/clase/detalle/" + idClase;
+    }
+    @PostMapping("/detalle/{idClase}/registroBono/{idRegistroBono}/confirmar")
+    public String confirmarUsuario(@PathVariable("idClase") int idClase,@PathVariable("idRegistroBono") int idRegistroBono, RedirectAttributes redirectAttributes){
+        try {
+            servicio.cambiarEstadoUsuario(idClase, idRegistroBono, Estado.CONFIRMADA);
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("errorMensaje", e.getMessage());
+        }
+        return "redirect:/clase/detalle/" + idClase;
+    }
+    @PostMapping("/detalle/{idClase}/registroBono/{idRegistroBono}/cancelar")
+    public String cancelarUsuario(@PathVariable("idClase") int idClase,@PathVariable("idRegistroBono") int idRegistroBono,RedirectAttributes redirectAttributes){
+        try {
+            servicio.cambiarEstadoUsuario(idClase, idRegistroBono, Estado.CANCELADA);
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("errorMensaje", e.getMessage());
+        }
+        return "redirect:/clase/detalle/" + idClase;
+    }
 }

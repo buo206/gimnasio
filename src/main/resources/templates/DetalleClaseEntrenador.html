@@ -32,7 +32,6 @@
             color: #495057;
         }
 
-
         .student-status-cell {
             padding: 15px 12px;
         }
@@ -60,8 +59,61 @@
             background-color: #fff3cd;
             color: #856404;
         }
-    </style>
 
+        /* --- NUEVOS ESTILOS PARA LOS BOTONES INTEGRADOS --- */
+        .btn-dark-slate {
+            background-color: #2b2d42;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-dark-slate:hover {
+            background-color: #1a1b29;
+        }
+
+        .btn-action-table {
+            border: 1px solid transparent;
+            cursor: pointer;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+
+        .btn-action-table:hover {
+            opacity: 0.85;
+        }
+
+        .btn-action-confirm {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #155724;
+        }
+
+        .btn-action-cancel {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #721c24;
+        }
+
+        .actions-wrapper {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .header-buttons-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -108,7 +160,14 @@
                 </p>
             </div>
 
-            <div>
+            <div class="header-buttons-container">
+                <form th:action="@{/clase/detalle/{id}/terminar(id=${clase.idClase})}" method="post"
+                      onclick="return confirm('¿Está seguro de que desea terminar la clase? Esto cambiará automáticamente el estado de TODOS los alumnos inscritos a CANCELADAS');">
+                    <button type="submit" class="btn btn-orange">
+                        Terminar clase
+                    </button>
+                </form>
+
                 <button class="btn btn-orange">
                     <a th:href="@{/clase/listaClases}" style="text-decoration: none; color: white;">
                         Volver al Listado
@@ -117,6 +176,7 @@
             </div>
         </div>
 
+        <div th:if="${mensajeExito}" class="alert alert-success" th:text="${mensajeExito}" style="color: green; font-weight: 500; margin-bottom: 20px;"></div>
         <div th:if="${errorMensaje}" class="alert alert-danger" th:text="${errorMensaje}"></div>
 
         <div class="row g-4" th:if="${clase}">
@@ -139,7 +199,7 @@
 
                     <div class="col-lg-4">
                         <div class="col-md-4">
-                            <h2 >Fecha</h2>
+                            <h2>Fecha</h2>
                             <p th:text="${clase.fecha}"></p>
                         </div>
 
@@ -161,27 +221,45 @@
                 </div>
             </div>
 
-            <div class="classes-card " >
-                <table th:if="${listaUsuarios}" class="table classes-table align-middle"  style=" margin-left: auto; margin-right: auto;">
-                        <thead>
-                        <tr>
-                            <th class="head">Alumno</th>
-                            <th class="head">Bono Utilizado</th>
-                            <th class="head">Estado Reserva</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="Usuario : ${listaUsuarios}">
+            <div class="classes-card">
+                <table th:if="${listaUsuarios}" class="table classes-table align-middle" style="margin-left: auto; margin-right: auto;">
+                    <thead>
+                    <tr>
+                        <th class="head">Alumno</th>
+                        <th class="head">Bono Utilizado</th>
+                        <th class="head">Estado Reserva</th>
+                        <th class="head" style="text-align: center;">Acción</th> </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="Usuario : ${listaUsuarios}">
 
-                            <td th:text="${Usuario.nombre + ' ' + Usuario.apellidos}">Juan Pérez</td>
-                            <td th:text="${Usuario.tipoBono}">Bono Pilates</td>
-                            <td class="student-status-cell" th:switch="${Usuario.estado.name()}">
-                                <span th:case="'CANCELADA'" class="status-badge status-canceled" th:text="${Usuario.estado}"></span>
-                                <span th:case="'CONFIRMADA'" class="status-badge status-confirmed" th:text="${Usuario.estado}"></span>
-                                <span th:case="'PENDIENTE'" class="status-badge status-pending" th:text="${Usuario.estado}"></span>
-                            </td>
-                        </tr>
-                        </tbody>
+                        <td th:text="${Usuario.nombre + ' ' + Usuario.apellidos}">Juan Pérez</td>
+                        <td th:text="${Usuario.tipoBono}">Bono Pilates</td>
+                        <td class="student-status-cell" th:switch="${Usuario.estado.name()}">
+                            <span th:case="'CANCELADA'" class="status-badge status-canceled" th:text="${Usuario.estado}"></span>
+                            <span th:case="'CONFIRMADA'" class="status-badge status-confirmed" th:text="${Usuario.estado}"></span>
+                            <span th:case="'PENDIENTE'" class="status-badge status-pending" th:text="${Usuario.estado}"></span>
+                        </td>
+
+                        <td>
+                            <div class="actions-wrapper">
+
+                                <form th:action="@{/clase/detalle/{idC}/registroBono/{idR}/confirmar(idC=${clase.idClase}, idR=${Usuario.idBono})}" method="post">
+                                    <button type="submit" class="btn-action-table btn-action-confirm">
+                                        Confirmar
+                                    </button>
+                                </form>
+
+                                <form th:action="@{/clase/detalle/{idC}/registroBono/{idR}/cancelar(idC=${clase.idClase}, idR=${Usuario.idBono})}" method="post">
+                                    <button type="submit" class="btn-action-table btn-action-cancel">
+                                        Cancelar
+                                    </button>
+                                </form>
+
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
                 </table>
             </div>
 
