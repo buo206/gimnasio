@@ -52,7 +52,7 @@ public class ClaseService {
     public void terminarClase(int idClase) {
         List<RegistroClase> listaInscritos = registroRepo.findByClaseIdClase(idClase);
         for (RegistroClase registro : listaInscritos) {
-            registro.setEstado(Estado.CANCELADA);
+            registro.setEstado(Estado.FINALIZADO);
         }
         registroRepo.saveAll(listaInscritos);
     }

@@ -1,5 +1,5 @@
 package com.example.gimnasio.Models;
 
 public enum Estado {
-    PENDIENTE , CONFIRMADA , CANCELADA
+    PENDIENTE , CONFIRMADA , CANCELADA ,FINALIZADO
 }

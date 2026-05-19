@@ -51,7 +51,7 @@ public class ClaseController {
         EntrenadorDTO entrenador =(EntrenadorDTO) session.getAttribute("entrenadorLogueado");
 
         if (entrenador == null) {
-            return "redirect:/entrenador/loguin";
+            return "redirect:/entrenador";
         }
         try {
             Clase clase = servicio.buscarPorId(idClase);
@@ -96,7 +96,7 @@ public class ClaseController {
     public String mostrarFormularioEditar(@PathVariable("idClase") int idClase, HttpSession session, Model model) {
         EntrenadorDTO entrenador = (EntrenadorDTO) session.getAttribute("entrenadorLogueado");
         if (entrenador == null) {
-            return "redirect:/entrenador/loguin";
+            return "redirect:/entrenador";
         }
 
         try {
@@ -117,7 +117,7 @@ public class ClaseController {
     public String guardarOActualizarClase(Clase clase, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
         EntrenadorDTO entrenador = (EntrenadorDTO) session.getAttribute("entrenadorLogueado");
         if (entrenador == null) {
-            return "redirect:/entrenador/loguin";
+            return "redirect:/entrenador";
         }
 
         if (clase.getFecha() == null || !clase.getFecha().isAfter(java.time.LocalDate.now())) {
@@ -184,7 +184,7 @@ public class ClaseController {
             return "FormularioClase";
         }
     @PostMapping("/detalle/{idClase}/terminar")
-    public String terminarClaseAction(@PathVariable("idClase")int idClase, RedirectAttributes redirectAttributes) {
+    public String terminarClase(@PathVariable("idClase")int idClase, RedirectAttributes redirectAttributes) {
         try {
             servicio.terminarClase(idClase);
             redirectAttributes.addFlashAttribute("mensajeExito", "Clase finalizada. Todas las reservas han pasado a CANCELADA.");

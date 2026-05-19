@@ -60,6 +60,11 @@
             color: #856404;
         }
 
+        .status-ending {
+            background-color: #fff3cd;
+            color: #e30a0a;
+        }
+
         /* --- NUEVOS ESTILOS PARA LOS BOTONES INTEGRADOS --- */
         .btn-dark-slate {
             background-color: #2b2d42;
@@ -261,6 +266,7 @@
                             <span th:case="'CANCELADA'" class="status-badge status-canceled" th:text="${usuario.estado}"></span>
                             <span th:case="'CONFIRMADA'" class="status-badge status-confirmed" th:text="${usuario.estado}"></span>
                             <span th:case="'PENDIENTE'" class="status-badge status-pending" th:text="${usuario.estado}"></span>
+                            <span th:case="'FINALIZADO'" class="status-badge status-ending" th:text="${usuario.estado}"></span>
                         </td>
 
                         <td>
