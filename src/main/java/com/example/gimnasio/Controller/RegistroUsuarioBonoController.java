@@ -7,9 +7,7 @@ import com.example.gimnasio.Service.RegistroUsuarioBonoService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -43,6 +41,48 @@ public class RegistroUsuarioBonoController {
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
             return "ListaRegistrosBonoUsuario";
+        }
+    }
+
+    @PostMapping("/comprarTipo1")
+    public String comprarTipo1(
+            HttpSession session,
+            RedirectAttributes redirectAttributes
+    ) {
+        Usuario usuario =(Usuario) session.getAttribute("usuarioLogueado");
+
+        if (usuario == null) {
+            return "redirect:/usuario";
+        }
+
+        try {
+            servicio.crearBonoTipo1(usuario.getIdUsuario());
+            redirectAttributes.addFlashAttribute("mensaje", "Compra Exitosa");
+            return "redirect:/registroClase/listaClasesUsuario";
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/usuario";
+        }
+    }
+
+    @PostMapping("/comprarTipo2")
+    public String comprarTipo2(
+            HttpSession session,
+            RedirectAttributes redirectAttributes
+    ) {
+        Usuario usuario =(Usuario) session.getAttribute("usuarioLogueado");
+
+        if (usuario == null) {
+            return "redirect:/usuario";
+        }
+
+        try {
+            servicio.crearBonoTipo2(usuario.getIdUsuario());
+            redirectAttributes.addFlashAttribute("mensaje", "Compra Exitosa");
+            return "redirect:/usuario";
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/usuario";
         }
     }
 

@@ -66,7 +66,16 @@ public class UsuarioController {
         return "UsuarioMenu";
     }
 
+    @GetMapping("/comprar")
+    public String comprar(HttpSession session, Model model) {
+        Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
 
+        if (usuario == null) {
+            return "redirect:/usuario";
+        }
+
+        return "ComprarBonos";
+    }
 
 
     @GetMapping("/logout")

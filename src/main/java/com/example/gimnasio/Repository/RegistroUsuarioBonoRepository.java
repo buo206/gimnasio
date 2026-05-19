@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RegistroUsuarioBonoRepository extends JpaRepository<RegistroUsuarioBono, Integer> {
 
@@ -33,4 +34,7 @@ public interface RegistroUsuarioBonoRepository extends JpaRepository<RegistroUsu
     ORDER BY rub.fechaCompra ASC
     """)
     List<RegistroUsuarioBonoDTO> buscarBonosPorUsuario(int idUsuario);
+
+    boolean existsByUsuario_IdUsuarioAndTipoBono_IdBono(int idUsuario , int idBono);
+
 }

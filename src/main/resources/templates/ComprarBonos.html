@@ -28,23 +28,25 @@
                 <div class="bono-card">
 
                     <div class="bono-title">
-                        Bono Básico
+                        Bono Tipo 1
                     </div>
 
                     <div class="bono-price">
-                        19€ / mes
+                        15€
                     </div>
 
                     <ul class="bono-list">
-                        <li>✔ Acceso a sala de máquinas</li>
-                        <li>✔ Vestuarios incluidos</li>
-                        <li>✔ Horario estándar</li>
-                        <li>✖ Clases dirigidas</li>
+                        <li>✔ Acceso a las clases grupales</li>
+                        <li>✔ 5 clases</li>
+                        <li>✔ Horario flexible</li>
+                        <li>✔ Clases dirigidas</li>
                     </ul>
 
-                    <a href="#" class="btn bono-btn">
-                        Comprar
-                    </a>
+                    <form th:action="@{/registroUsuarioBono/comprarTipo1}" method="post">
+                        <button type="submit" class="btn bono-btn">
+                            Comprar
+                        </button>
+                    </form>
 
                 </div>
 
@@ -56,30 +58,34 @@
                 <div class="bono-card premium">
 
                     <div class="bono-title">
-                        Bono Premium
+                        Bono Tipo 2
                     </div>
 
                     <div class="bono-price">
-                        39€ / mes
+                        80€
                     </div>
 
                     <ul class="bono-list">
-                        <li>✔ Todo lo del básico</li>
-                        <li>✔ Clases dirigidas ilimitadas</li>
+                        <li>✔ Clases personales</li>
+                        <li>✔ 10 sesiones</li>
+                        <li>✔ Clases dirigidas </li>
                         <li>✔ Entrenador personal</li>
-                        <li>✔ Acceso 24/7</li>
                     </ul>
 
-                    <a href="#" class="btn bono-btn">
-                        Comprar
-                    </a>
-
+                    <form th:action="@{/registroUsuarioBono/comprarTipo2}" method="post">
+                        <button type="submit" class="btn bono-btn">
+                            Comprar
+                        </button>
+                    </form>
                 </div>
-
             </div>
-
         </div>
 
+    </div>
+    <div class="bonos-header">
+        <a th:href="@{/usuario/home}" class="btn bono-btn" style="margin: 2%">
+            Volver
+        </a>
     </div>
 
 </div>
