@@ -5,10 +5,7 @@ import com.example.gimnasio.DTO.EntrenadorDTO;
 import com.example.gimnasio.DTO.ListaClaseConTipoBonoDTO;
 import com.example.gimnasio.DTO.ListaClaseEntrenadorDTO;
 import com.example.gimnasio.DTO.RegistroClaseDTO;
-import com.example.gimnasio.Models.Estado;
-import com.example.gimnasio.Models.TipoBono;
-import com.example.gimnasio.Models.Usuario;
-import com.example.gimnasio.Models.Clase;
+import com.example.gimnasio.Models.*;
 import com.example.gimnasio.Service.ClaseService;
 import com.example.gimnasio.Service.TipoBonoService;
 import jakarta.servlet.http.HttpSession;
@@ -118,25 +115,73 @@ public class ClaseController {
     }
 
     @PostMapping("/actualizar")
-    public String actualizarClase(Clase clase, HttpSession session, RedirectAttributes redirectAttributes) {
+    public String guardarOActualizarClase(Clase clase, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
         EntrenadorDTO entrenador = (EntrenadorDTO) session.getAttribute("entrenadorLogueado");
         if (entrenador == null) {
             return "redirect:/entrenador/loguin";
         }
 
+        if (clase.getFecha() == null || !clase.getFecha().isAfter(java.time.LocalDate.now())) {
+            model.addAttribute("errorMensaje", "La fecha de la sesión debe ser posterior a la fecha actual del sistema.");
+            model.addAttribute("clase", clase);
+            model.addAttribute("listaBonos", servicioBono.listarBonos());
+            model.addAttribute("entrenador", entrenador);
+            return "FormularioClase";
+        }
+
         try {
-            Clase claseOriginal = servicio.buscarPorId(clase.getIdClase());
-            claseOriginal.setTitulo(clase.getTitulo());
-            claseOriginal.setFecha(clase.getFecha());
-            claseOriginal.setHora(clase.getHora());
-            claseOriginal.setCupoMax(clase.getCupoMax());
-            claseOriginal.setIdBono(clase.getIdBono());
-            servicio.guardar(claseOriginal);
-            redirectAttributes.addFlashAttribute("mensajeExito", "Clase actualizada");
+            if (clase.getIdClase() > 0) {
+                Clase claseOriginal = servicio.buscarPorId(clase.getIdClase());
+                if (claseOriginal.getIdBono() != null && claseOriginal.getIdBono().getIdBono() == 2 && clase.getCupoMax() > 1) {
+                    model.addAttribute("errorMensaje", "El Tipo 2 de bono es para clases individuales. El cupo máximo permitido es de 1 persona.");
+                    model.addAttribute("clase", clase);
+                    model.addAttribute("listaBonos", servicioBono.listarBonos());
+                    model.addAttribute("entrenador", entrenador);
+                    return "FormularioClase";
+                }
+                claseOriginal.setTitulo(clase.getTitulo());
+                claseOriginal.setFecha(clase.getFecha());
+                claseOriginal.setHora(clase.getHora());
+                claseOriginal.setCupoMax(clase.getCupoMax());
+
+                servicio.guardar(claseOriginal);
+                redirectAttributes.addFlashAttribute("mensajeExito", "Clase actualizada con éxito");
+
+            } else {
+                if (clase.getIdBono() != null && clase.getIdBono().getIdBono() == 2 && clase.getCupoMax() != 1) {
+                    model.addAttribute("errorMensaje", "El Tipo 2 de bono solo permite un cupo máximo de 1 persona.");
+                    model.addAttribute("clase", clase);
+                    model.addAttribute("listaBonos", servicioBono.listarBonos());
+                    model.addAttribute("entrenador", entrenador);
+                    return "FormularioClase";
+                }
+                Entrenador entrenadorModelo = new Entrenador();
+                entrenadorModelo.setIdEntranador(entrenador.idEntrenador());
+
+                clase.setEntrenador(entrenadorModelo);
+
+                servicio.guardar(clase);
+                redirectAttributes.addFlashAttribute("mensajeExito", "Nueva clase creada con éxito");
+            }
         } catch (RuntimeException e) {
-            redirectAttributes.addFlashAttribute("errorMensaje", "Error al actualizar la clase:");
+            model.addAttribute("errorMensaje", "Error en el sistema: " + e.getMessage());
+            model.addAttribute("clase", clase);
+            model.addAttribute("listaBonos", servicioBono.listarBonos());
+            model.addAttribute("entrenador", entrenador);
+            return "FormularioClase";
         }
 
         return "redirect:/clase/listaClases";
     }
+    @GetMapping("/nuevo")
+    public String NuevaClase(HttpSession session, Model model){
+        EntrenadorDTO entrenador = (EntrenadorDTO) session.getAttribute("entrenadorLogueado");
+        if (entrenador == null) {
+            return "redirect:/entrenador/loguin";
+        }
+            model.addAttribute("clase", new Clase());
+            model.addAttribute("listaBonos", servicioBono.listarBonos());
+            model.addAttribute("entrenador", entrenador);
+            return "FormularioClase";
+        }
 }

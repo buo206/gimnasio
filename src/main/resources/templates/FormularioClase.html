@@ -4,27 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Editar Clase</title>
+    <title th:if="${clase.idClase == 0}">Nueva Clase</title>
+    <title th:unless="${clase.idClase == 0}">Editar Clase</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <link rel="stylesheet" href="/Principal.css">
 </head>
 <body>
 
 <div class="edit-class-page">
-
     <div class="edit-class-card">
 
         <div class="edit-header">
             <div>
-                <span class="edit-badge">
-                    Gestión de Clase
-                </span>
-                <h1>
-                    Modificar parámetros de la clase
-                </h1>
+                <span class="edit-badge">Gestión de Clase</span>
+
+                <h1 th:if="${clase.idClase == 0}">Crear Nueva Clase</h1>
+                <h1 th:unless="${clase.idClase == 0}">Modificar parámetros de la clase</h1>
             </div>
+        </div>
+
+        <div th:if="${errorMensaje}" class="alert alert-danger" role="alert" mt-3>
+            <span th:text="${errorMensaje}"></span>
         </div>
 
         <form th:action="@{/clase/actualizar}" th:object="${clase}" method="post">
@@ -32,69 +33,63 @@
             <input type="hidden" th:field="*{idClase}" />
 
             <div class="row g-4">
-
                 <div class="col-md-12">
-                    <label class="edit-label" for="titulo">
-                        Título de la Clase
-                    </label>
+                    <label class="edit-label" for="titulo">Título de la Clase</label>
                     <input type="text" th:field="*{titulo}" class="form-control edit-input" id="titulo" required />
                 </div>
 
                 <div class="col-md-6">
-                    <label class="edit-label" for="fecha">
-                        Fecha de la Sesión
-                    </label>
+                    <label class="edit-label" for="fecha">Fecha de la Sesión</label>
                     <input type="date" th:field="*{fecha}" class="form-control edit-input" id="fecha" required />
                 </div>
 
                 <div class="col-md-6">
-                    <label class="edit-label" for="hora">
-                        Horario / Hora de inicio
-                    </label>
+                    <label class="edit-label" for="hora">Horario / Hora de inicio</label>
                     <input type="time" th:field="*{hora}" class="form-control edit-input" id="hora" required />
                 </div>
 
                 <div class="col-md-6">
-                    <label class="edit-label" for="cupoMax">
-                        Cupo Máximo (Alumnos)
-                    </label>
+                    <label class="edit-label" for="cupoMax">Cupo Máximo (Alumnos)</label>
                     <input type="number" th:field="*{cupoMax}" min="1" class="form-control edit-input" id="cupoMax" required />
                 </div>
-                <div class="form-group">
-                    <label for="tipoBono">Tipo de Bono para la Clase:</label>
-                    <select id="tipoBono" th:field="*{idBono}" class="form-select edit-input" required>
+
+                <div class="col-md-6">
+                    <label class="edit-label" for="tipoBono">Tipo de Bono para la Clase:</label>
+
+                    <select th:if="${clase.idClase == 0}" id="tipoBono" th:field="*{idBono}" class="form-select edit-input" required>
+                        <option value="">-- Selecciona un Bono --</option>
+                        <option th:each="bono : ${listaBonos}"
+                                th:value="${bono.idBono}"
+                                th:text="${bono.tituloBono}">
+                        </option>
+                    </select>
+
+                    <select th:unless="${clase.idClase == 0}" id="tipoBono" th:field="*{idBono}" class="form-select edit-input" disabled required>
                         <option th:each="bono : ${listaBonos}"
                                 th:value="${bono.idBono}"
                                 th:text="${bono.tituloBono}">
                         </option>
                     </select>
                 </div>
-
             </div>
 
-            <div th:if="${errorMensaje}" class="row mt-3">
-                <div class="col-12">
-                    <p th:text="${errorMensaje}" style="color:red; font-weight: 500;"></p>
-                </div>
-            </div>
-
-            <div class="edit-buttons">
-                <button  class="btn cancel-btn">
-                    <a th:href="@{/clase/listaClases}" style="color: white; text-decoration: none" >
-                        Cancelar
-                    </a>
+            <div class="edit-buttons mt-4">
+                <button type="button" class="btn cancel-btn">
+                    <a th:href="@{/clase/listaClases}" style="color: white; text-decoration: none">Cancelar</a>
                 </button>
 
-                <button type="submit" class="btn btn-orange" style="color: white;" onclick="return confirm('¿Seguro que quiere guardar los cambios en esta clase?');">
+                <button th:if="${clase.idClase == 0}" type="submit" class="btn btn-orange" style="color: white;"
+                        onclick="return confirm('¿Seguro que quiere crear esta nueva clase?');">
+                    Crear Clase
+                </button>
+
+                <button th:unless="${clase.idClase == 0}" type="submit" class="btn btn-orange" style="color: white;"
+                        onclick="return confirm('¿Seguro que quiere guardar los cambios en esta clase?');">
                     Guardar Cambios
                 </button>
-
             </div>
-
         </form>
-
     </div>
-
 </div>
 
 </body>
