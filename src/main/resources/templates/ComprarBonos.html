@@ -42,9 +42,11 @@
                         <li>✔ Clases dirigidas</li>
                     </ul>
 
-                    <a th:href="@{/registroUsuarioBono/comprarTipo2}" class="btn bono-btn">
-                        Comprar
-                    </a>
+                    <form th:action="@{/registroUsuarioBono/comprarTipo1}" method="post">
+                        <button type="submit" class="btn bono-btn">
+                            Comprar
+                        </button>
+                    </form>
 
                 </div>
 
@@ -70,9 +72,11 @@
                         <li>✔ Entrenador personal</li>
                     </ul>
 
-                    <a th:href="@{/registroUsuarioBono/comprarTipo1}" class="btn bono-btn">
-                        Comprar
-                    </a>
+                    <form th:action="@{/registroUsuarioBono/comprarTipo2}" method="post">
+                        <button type="submit" class="btn bono-btn">
+                            Comprar
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

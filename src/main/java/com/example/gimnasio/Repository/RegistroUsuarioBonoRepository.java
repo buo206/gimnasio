@@ -35,6 +35,6 @@ public interface RegistroUsuarioBonoRepository extends JpaRepository<RegistroUsu
     """)
     List<RegistroUsuarioBonoDTO> buscarBonosPorUsuario(int idUsuario);
 
-    boolean existByUsuario_IdUsuarioAndTipoBono_IdBono(int idUsuario , int idBono);
+    boolean existsByUsuario_IdUsuarioAndTipoBono_IdBono(int idUsuario , int idBono);
 
 }

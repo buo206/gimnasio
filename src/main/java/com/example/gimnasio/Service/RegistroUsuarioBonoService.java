@@ -53,7 +53,7 @@ public class RegistroUsuarioBonoService {
 
         RegistroUsuarioBono resultado = repo.save(registro);
 
-        if(! repo.existByUsuario_IdUsuarioAndTipoBono_IdBono(idUsuario, 3)){
+        if(! repo.existsByUsuario_IdUsuarioAndTipoBono_IdBono(idUsuario, 3)){
             Optional<TipoBono> bono2 = repoBono.findById(3);
             if(bono2.isEmpty()){
                 throw new RuntimeException("No existe el tipo de bono que se intenta auto implementar");
@@ -92,7 +92,7 @@ public class RegistroUsuarioBonoService {
 
         RegistroUsuarioBono resultado = repo.save(registro);
 
-        if(! repo.existByUsuario_IdUsuarioAndTipoBono_IdBono(idUsuario, 3)){
+        if(! repo.existsByUsuario_IdUsuarioAndTipoBono_IdBono(idUsuario, 3)){
             Optional<TipoBono> bono2 = repoBono.findById(3);
             if(bono2.isEmpty()){
                 throw new RuntimeException("No existe el tipo de bono que se intenta auto implementar");
