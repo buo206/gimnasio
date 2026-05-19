@@ -73,8 +73,7 @@ public class ClaseController {
     public String listarClasesDisponibles(
             @PathVariable int idUsuario,
             Model model ,
-            HttpSession session,
-            RedirectAttributes redirectAttributes
+            HttpSession session
     ){
         Usuario usuario =(Usuario) session.getAttribute("usuarioLogueado");
 

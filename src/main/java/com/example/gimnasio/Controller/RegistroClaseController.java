@@ -50,19 +50,18 @@ public class RegistroClaseController {
         }
     }
 
-    @GetMapping("/listaClasesUsuario/{idUsuario}")
-    public String listaClases(@PathVariable int idUsuario , HttpSession session, Model model , RedirectAttributes redirectAttributes) {
-        Usuario usuario =
-                (Usuario) session.getAttribute("usuarioLogueado");
+    @GetMapping("/listaClasesUsuario")
+    public String listaClases(HttpSession session, Model model , RedirectAttributes redirectAttributes) {
+        Usuario usuario =(Usuario) session.getAttribute("usuarioLogueado");
 
         if (usuario == null) {
             return "redirect:/usuario";
         }
 
         try {
-            List<ListaRegistroClaseUsuarioDTO>  listaClases= servicio.listarRegistroPorUsuario(idUsuario);
+            List<ListaRegistroClaseUsuarioDTO>  listaClases= servicio.listarRegistroPorUsuario(usuario.getIdUsuario());
             model.addAttribute("listaClases", listaClases);
-            model.addAttribute("idUsuario", idUsuario);
+            model.addAttribute("idUsuario", usuario.getIdUsuario());
             return "ListaClasesUsuario";
 
         } catch (RuntimeException e) {

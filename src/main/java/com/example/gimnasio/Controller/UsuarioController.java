@@ -65,17 +65,7 @@ public class UsuarioController {
         return "UsuarioMenu";
     }
 
-    @GetMapping("/listaClases")
-    public String listaClases(HttpSession session) {
-        Usuario usuario =
-                (Usuario) session.getAttribute("usuarioLogueado");
 
-        if (usuario == null) {
-            return "redirect:/usuario";
-        }
-
-        return "redirect:/registroClase/listaClasesUsuario/"+usuario.getIdUsuario();
-    }
 
 
     @GetMapping("/logout")
