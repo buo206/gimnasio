@@ -83,6 +83,7 @@ public class UsuarioController {
         session.invalidate();
         return "redirect:/usuario";
     }
+
     @GetMapping("/editarPerfil")
     public String editarPerfilUsuario(HttpSession session, Model model) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
@@ -95,6 +96,7 @@ public class UsuarioController {
         return "EditarUsuario";
 
     }
+
     @PostMapping("/guardarPerfil")
     public String guardarPerfil(HttpSession session, Model model,@ModelAttribute("usuario")Usuario usuarioModelo, RedirectAttributes redirectAttributes){
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
