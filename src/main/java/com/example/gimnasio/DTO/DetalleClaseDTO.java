@@ -7,6 +7,7 @@ public record DetalleClaseDTO(
         String nombre,
         String apellidos,
         Estado estado,
+        int idRegistroBono,
         int idBono,
         String tipoBono
 ) {

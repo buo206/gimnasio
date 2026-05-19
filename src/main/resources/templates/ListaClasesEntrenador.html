@@ -6,6 +6,33 @@
     <title>Lista de Clases</title>
     <link href="/Principal.css" rel="stylesheet">
 
+    <style>
+        /* Estilo base para el cuadrito */
+        .badge-bono {
+            display: inline-block;
+            padding: 8px 16px;
+            font-weight: bold;
+            color: white;
+            border-radius: 6px; /* Esquinas ligeramente redondeadas */
+            text-align: center;
+            min-width: 100px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Colores según el tipo */
+        .bono-tipo1 {
+            background-color: #fd610d; /* Azul Bootstrap */
+        }
+
+        .bono-tipo2 {
+            background-color: #c6ba21; /* Verde Bootstrap */
+        }
+
+        .bono-ambos {
+            background-color: #59b621; /* Naranja */
+        }
+
+    </style>
 </head>
 <body>
 <div class="trainer-layout">
@@ -41,7 +68,8 @@
                 <tr>
                     <td class="head">ID</td>
                     <td class="head">Título</td>
-                    <td class="head">Especialidad / Bono</td> <td class="head">Fecha</td>
+                    <td class="head">Especialidad / Bono</td>
+                    <td class="head">Fecha</td>
                     <td class="head">Hora</td>
                     <td class="head">Cupo</td>
                     <td class="head">Acciones</td>
@@ -52,8 +80,10 @@
                 <tr th:each="c : ${listaClases}">
                     <td th:text="${c.idClase()}"></td>
                     <td th:text="${c.titulo()}" class="fw-semibold"></td>
-                    <td>
-                        <span class="bonus-tag" th:text="${c.tituloBono()}">Bono General</span>
+                    <td th:switch="${c.tituloBono()}">
+                        <span th:case="'Tipo 1'" class="badge-bono bono-tipo1" th:text="${c.tituloBono()}">Tipo 1</span>
+                        <span th:case="'Tipo 2'" class="badge-bono bono-tipo2" th:text="${c.tituloBono()}">Tipo 2</span>
+                        <span th:case="'Ambos'" class="badge-bono bono-ambos" th:text="${c.tituloBono()}">Ambos</span>
                     </td>
                     <td th:text="${c.fecha()}"></td>
                     <td th:text="${c.hora()}"></td>

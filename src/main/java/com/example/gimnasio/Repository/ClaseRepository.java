@@ -22,7 +22,7 @@ public interface ClaseRepository extends JpaRepository<Clase, Integer> {
 
     @Query("""
     SELECT new com.example.gimnasio.DTO.DetalleClaseDTO(
-        c.idClase,u.nombre,u.apellidos,rc.estado,tb.idBono,tb.tituloBono)
+        c.idClase,u.nombre,u.apellidos,rc.estado,rb.idRegistroBono,tb.idBono,tb.tituloBono)
     FROM RegistroClase rc JOIN Clase c ON rc.clase = c
     JOIN RegistroUsuarioBono rb ON rc.registroUsuarioBono = rb
     JOIN TipoBono tb ON rb.tipoBono = tb
