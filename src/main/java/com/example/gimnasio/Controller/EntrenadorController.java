@@ -3,6 +3,7 @@ package com.example.gimnasio.Controller;
 import com.example.gimnasio.DTO.EntrenadorDTO;
 import com.example.gimnasio.DTO.LoguinDTO;
 import com.example.gimnasio.Service.EntrenadorSevice;
+import com.example.gimnasio.Service.UsuarioService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/entrenador")
 public class EntrenadorController {
     private final EntrenadorSevice servicio ;
+    private final UsuarioService usuService;
 
-    public EntrenadorController(EntrenadorSevice servicio) {
+    public EntrenadorController(EntrenadorSevice servicio,UsuarioService usuService) {
         this.servicio = servicio;
+        this.usuService = usuService;
     }
 
     @GetMapping("")
@@ -78,5 +81,21 @@ public class EntrenadorController {
 
         model.addAttribute("entrenador", entrenador);
         return "redirect:/clase/listaClases";
+    }
+    @GetMapping("/usuarios")
+    public String listarUsuariosGimnasio(HttpSession session, Model model) {
+        EntrenadorDTO entrenadorDTO = (EntrenadorDTO) session.getAttribute("entrenadorLogueado");
+        if (entrenadorDTO == null) {
+            return "redirect:/entrenador/loguin";
+        }
+
+        try {
+            model.addAttribute("entrenador", entrenadorDTO);
+            model.addAttribute("listaUsuarios", usuService.listarTodosLosUsuarios());
+        } catch (RuntimeException e) {
+            model.addAttribute("errorMensaje", e.getMessage());
+        }
+
+        return "ListaUsuarios";
     }
 }

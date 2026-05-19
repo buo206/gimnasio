@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Rutinas - Gestión de Usuarios</title>
+    <link href="/Principal.css" rel="stylesheet">
+    <style>
+        .students-table th {
+            padding: 12px;
+            color: #495057;
+        }
+
+        .user-action-btn {
+            background-color: #ff6b00;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.2s;
+        }
+
+        .user-action-btn:hover {
+            background-color: #e05e00;
+        }
+    </style>
+</head>
+<body>
+
+<div class="trainer-layout">
+
+    <aside class="trainer-sidebar">
+        <div>
+            <div class="trainer-logo">
+                🏋️
+            </div>
+            <h2 class="trainer-name" th:text="${entrenador.nombre()}">
+                Entrenador
+            </h2>
+        </div>
+
+        <nav class="trainer-menu">
+            <a th:href="@{/entrenador/home}">
+                Inicio
+            </a>
+            <a th:href="@{/clase/listaClases}">
+                Mis Clases
+            </a>
+            <a th:href="@{/entrenador/usuarios}" class="active">
+                Mis Usuarios
+            </a>
+            <a href="#">
+                Horarios
+            </a>
+            <a href="#">
+                Ajustes
+            </a>
+        </nav>
+    </aside>
+
+    <main class="trainer-content">
+
+        <div class="trainer-header">
+            <div>
+                <h1>Historial de Usuarios</h1>
+                <p>Listado global de clientes registrados en el sistema del gimnasio</p>
+            </div>
+            <div>
+                <button class="btn btn-orange">
+                    <a th:href="@{/entrenador/home}" style="text-decoration: none; color: white;">Volver a Inicio</a>
+                </button>
+            </div>
+        </div>
+
+        <div th:if="${errorMensaje}" class="alert alert-danger" th:text="${errorMensaje}" style="color: red; margin-bottom: 20px;"></div>
+
+        <div class="classes-card" th:if="${listaUsuarios}">
+            <table class="table classes-table align-middle" style="margin-left: auto; margin-right: auto;">
+                <thead>
+                <tr>
+                    <th class="head">ID</th>
+                    <th class="head">Nombre Completo</th>
+                    <th class="head">DNI</th>
+                    <th class="head">Correo Electrónico</th>
+                    <th class="head">Teléfono</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="usuario : ${listaUsuarios}">
+                    <td th:text="${usuario.idUsuario}"></td>
+                    <td th:text="${usuario.nombre + ' ' + usuario.apellidos}"></td>
+                    <td th:text="${usuario.dni}"></td>
+                    <td th:text="${usuario.email}"></td>
+                    <td th:text="${usuario.telefono}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>
