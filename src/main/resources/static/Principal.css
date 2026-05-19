@@ -1016,3 +1016,110 @@ select.edit-input {
     }
 
 }
+
+/* =======================================================
+   BONOS PAGE
+======================================================= */
+
+.bonos-page {
+    min-height: 100vh;
+    padding: 60px 20px;
+
+    background:
+            radial-gradient(circle at top left, rgba(255,102,0,0.08), transparent 25%),
+            #0f0f0f;
+
+    color: white;
+}
+
+/* HEADER */
+.bonos-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.bonos-header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+}
+
+.bonos-header p {
+    color: rgba(255,255,255,0.6);
+}
+
+/* CARD */
+.bono-card {
+    background: rgba(28,28,28,0.95);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 30px;
+
+    padding: 40px;
+
+    box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+
+    text-align: center;
+
+    transition: 0.3s ease;
+}
+
+/* hover */
+.bono-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255,102,0,0.3);
+}
+
+/* PREMIUM highlight */
+.premium {
+    border: 1px solid rgba(255,102,0,0.4);
+    box-shadow: 0 15px 45px rgba(255,102,0,0.15);
+}
+
+/* TITULO */
+.bono-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* PRECIO */
+.bono-price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ff8c42;
+    margin-bottom: 25px;
+}
+
+/* LISTA */
+.bono-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.bono-list li {
+    margin-bottom: 12px;
+    color: rgba(255,255,255,0.8);
+}
+
+/* BOTON */
+.bono-btn {
+    display: inline-block;
+
+    background: linear-gradient(135deg, #ff6600, #ff8c42);
+    color: white;
+
+    padding: 12px 30px;
+    border-radius: 16px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: 0.3s ease;
+}
+
+.bono-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255,102,0,0.3);
+    color: white;
+}
