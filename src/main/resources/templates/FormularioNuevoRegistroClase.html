@@ -66,8 +66,8 @@
             <!-- BOTONES -->
             <div class="edit-buttons">
 
-                <button type="button" class="btn cancel-btn" th:onclick="|window.location.href='@{/registroClase/listaClasesUsuario/{idUsuario}(idUsuario=${idUsuario})}'|">
-                    Cancelar
+                <button type="button" class="btn cancel-btn" >
+                    <a th:href="@{/registroClase/listaClasesUsuario}" style="text-decoration: none; color: white;" >Cancelar </a>
                 </button>
             </div>
 

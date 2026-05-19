@@ -33,8 +33,7 @@ public class RegistroClaseController {
             HttpSession session,
             RedirectAttributes redirectAttributes
     ) {
-        Usuario usuario =
-                (Usuario) session.getAttribute("usuarioLogueado");
+        Usuario usuario =(Usuario) session.getAttribute("usuarioLogueado");
 
         if (usuario == null) {
             return "redirect:/usuario";
@@ -43,7 +42,7 @@ public class RegistroClaseController {
         try {
             servicio.crearRegistro(registroClaseDTO, idUsuario);
             redirectAttributes.addFlashAttribute("mensaje", "Reserva creada correctamente");
-            return "redirect:/registroClase/listaClasesUsuario/" + idUsuario;
+            return "redirect:/registroClase/listaClasesUsuario";
         } catch (RuntimeException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/clase/listaClasesDisponibles/" + idUsuario;
@@ -73,8 +72,7 @@ public class RegistroClaseController {
 
     @GetMapping("/eliminarRegistro/{idRegistroClase}/{idUsuario}")
     public String eliminarRegistro(@PathVariable int idRegistroClase , @PathVariable int idUsuario, HttpSession session, Model model , RedirectAttributes redirectAttributes) {
-        Usuario usuario =
-                (Usuario) session.getAttribute("usuarioLogueado");
+        Usuario usuario =(Usuario) session.getAttribute("usuarioLogueado");
 
         if (usuario == null) {
             return "redirect:/usuario";
@@ -82,7 +80,7 @@ public class RegistroClaseController {
 
         try {
             servicio.borrarRegistro(idRegistroClase);
-            return "redirect:/registroClase/listaClasesUsuario/"+idUsuario;
+            return "redirect:/registroClase/listaClasesUsuario";
 
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
