@@ -58,7 +58,7 @@ public class RegistroUsuarioBonoController {
         try {
             servicio.crearBonoTipo1(usuario.getIdUsuario());
             redirectAttributes.addFlashAttribute("mensaje", "Compra Exitosa");
-            return "redirect:/registroClase/listaClasesUsuario";
+            return "redirect:/usuario";
         } catch (RuntimeException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/usuario";

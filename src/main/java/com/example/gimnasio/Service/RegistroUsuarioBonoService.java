@@ -49,7 +49,7 @@ public class RegistroUsuarioBonoService {
         registro.setUsuario(usuario.get());
         registro.setTipoBono(bono.get());
         registro.setFechaCompra(LocalDate.now());
-        registro.setUsos(5);
+        registro.setUsos(0);
 
         RegistroUsuarioBono resultado = repo.save(registro);
 
@@ -88,7 +88,7 @@ public class RegistroUsuarioBonoService {
         registro.setUsuario(usuario.get());
         registro.setTipoBono(bono.get());
         registro.setFechaCompra(LocalDate.now());
-        registro.setUsos(5);
+        registro.setUsos(0);
 
         RegistroUsuarioBono resultado = repo.save(registro);
 
